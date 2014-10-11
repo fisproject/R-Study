@@ -15,5 +15,12 @@ table(pred.forest, iris.test[,5])
 
 # decision tree
 tree <- rpart(Species~.,data=iris.train)
-pred.rpart<-predict(tree, iris.test, type="class")
+pred.rpart <- predict(tree, iris.test, type="class")
 table(pred.rpart, iris.test[,5])
+
+# importance
+getTree(forest, 1, labelVar=TRUE)
+varImpPlot(forest)
+
+# plot
+plot(forest)
