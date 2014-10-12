@@ -1,6 +1,7 @@
 # install.package("randomForest")
 library(randomForest)
 library(rpart) 
+library(RColorBrewer)
 
 # random sampling
 n <- nrow(iris)
@@ -9,7 +10,7 @@ iris.train <- iris[s,]
 iris.test <- iris[-s,]
 
 # random forest
-forest <- randomForest(Species~., data=iris.train, ntree=500)
+forest <- randomForest(Species~., data=iris.train, ntree=500, proximity=TRUE)
 pred.forest <- predict(forest, newdata=iris.test, type="class")
 table(pred.forest, iris.test[,5])
 
@@ -22,5 +23,12 @@ table(pred.rpart, iris.test[,5])
 getTree(forest, 1, labelVar=TRUE)
 varImpPlot(forest)
 
-# plot
-plot(forest)
+# report
+split.screen(c(2,1))
+split.screen(c(1,3), screen = 2)
+screen(3); partialPlot(forest, iris, Petal.Length, "setosa")
+screen(4); partialPlot(forest, iris, Petal.Length, "versicolor")
+screen(5); partialPlot(forest, iris, Petal.Length, "virginica")
+split.screen(c(2,1), screen = 1)
+screen(1); plot(forest) 
+close.screen(all=T)
