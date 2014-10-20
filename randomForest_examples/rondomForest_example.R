@@ -22,6 +22,7 @@ table(pred.rpart, iris.test[,5])
 # importance
 getTree(forest, 1, labelVar=TRUE)
 varImpPlot(forest)
+MDSplot(forest, iris$Species, palette=rep(1, 3), pch=as.numeric(iris$Species))
 
 # report
 split.screen(c(2,1))
