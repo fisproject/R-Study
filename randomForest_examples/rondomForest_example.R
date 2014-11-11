@@ -1,4 +1,4 @@
-# install.package("randomForest")
+# install.packages("randomForest")
 library(randomForest)
 library(rpart) 
 library(RColorBrewer)

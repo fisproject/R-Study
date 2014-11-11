@@ -1,4 +1,4 @@
-# install.package("ggplot2")
+# install.packages("ggplot2")
 library(ggplot2)
 
 d <- iris
