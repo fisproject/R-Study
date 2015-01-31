@@ -11,12 +11,12 @@ step(air.lm)
 
 plot3d(air$Wind, air$Temp, air$Ozone,
 	xlab = "wind", ylab = "temp", zlab = "ozone",
-  size = 1, type = "s", col = "blue")
+	size = 1, type = "s", col = "blue")
 
 # add predict
 air.pre = predict(air.lm)
 plot3d(air$Wind, air$Temp, air.pre,
 	xlab = "wind", ylab = "temp", zlab = "ozone",
-  size = 1, type = "s", add = TRUE, col = "red")
+	size = 1, type = "s", add = TRUE, col = "red")
 
 writeWebGL(width=500, height=550)

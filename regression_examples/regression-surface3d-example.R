@@ -17,14 +17,14 @@ x1 <- seq(from = 2.3, to = 20.7, by = 0.1)
 x2 <- seq(from = 57, to = 97, by = 1)
 
 air.sur <- outer(X = x1, Y = x2, FUN = function(x1, x2) {
-    predict(air.lm, newdata = data.frame(x1 = x1, x2 = x2))
+	predict(air.lm, newdata = data.frame(x1 = x1, x2 = x2))
 })
 
 plot3d(x1, x2, air$Ozone,
-		xlab = "wind", ylab = "temp", zlab = "ozone",
-		size = 1, type = "s", col = "blue")
+	xlab = "wind", ylab = "temp", zlab = "ozone",
+	size = 1, type = "s", col = "blue")
 
 surface3d(x = x1, y = x2, z = air.sur,
-          col = "red", alpha = 0.5)
+	col = "red", alpha = 0.5)
 
 writeWebGL(width=500, height=550)
