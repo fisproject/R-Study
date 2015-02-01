@@ -1,11 +1,13 @@
 # install.packages("rgl")
 library(rgl)
+library(car)
 
 air <- na.omit(airquality)
 pairs(airquality[,1:4],pch=21,bg="red",cex=1)
 
 air.lm <-lm(air$Ozone~air$Solar.R+air$Wind+air$Temp, data=air)
 summary(air.lm)
+vif(air.lm)
 
 step(air.lm)
 
