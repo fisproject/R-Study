@@ -21,4 +21,6 @@ plot3d(air$Wind, air$Temp, air.pre,
 	xlab = "wind", ylab = "temp", zlab = "ozone",
 	size = 1, type = "s", add = TRUE, col = "red")
 
+grid3d(c("x", "y+", "z"))
+
 writeWebGL(width=500, height=550)
