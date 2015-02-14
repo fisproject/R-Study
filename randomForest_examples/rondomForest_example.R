@@ -5,7 +5,7 @@ library(RColorBrewer)
 
 # random sampling
 n <- nrow(iris)
-s <- sample(n,n*0.5)
+s <- sample(n, n*0.5)
 iris.train <- iris[s,]
 iris.test <- iris[-s,]
 
@@ -15,7 +15,7 @@ pred.forest <- predict(forest, newdata=iris.test, type="class")
 table(pred.forest, iris.test[,5])
 
 # decision tree
-tree <- rpart(Species~.,data=iris.train)
+tree <- rpart(Species~., data=iris.train)
 pred.rpart <- predict(tree, iris.test, type="class")
 table(pred.rpart, iris.test[,5])
 
