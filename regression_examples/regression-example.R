@@ -2,6 +2,7 @@
 library(rgl)
 library(car)
 
+# airquality : Daily air quality measurements in New York. May to September 1973.
 air <- na.omit(airquality)
 pairs(airquality[,1:4],pch=21,bg="red",cex=1)
 
