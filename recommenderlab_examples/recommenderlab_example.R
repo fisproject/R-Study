@@ -1,5 +1,5 @@
 # install.packages("recommenderlab")
-library(recommenderlab)
+require(recommenderlab)
 
 data(Jester5k)
 d.sample <- sample(Jester5k)

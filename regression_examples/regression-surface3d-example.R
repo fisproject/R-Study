@@ -1,12 +1,12 @@
 # install.packages("rgl")
-library(rgl)
+require(rgl)
 
 # airquality : Daily air quality measurements in New York. May to September 1973.
 air <- na.omit(airquality)
 x1 <- air$Wind
 x2 <- air$Temp
 
-air.lm <-lm(air$Ozone~(x1+x2)^2, data=air)
+air.lm <-lm(air$Ozone ~ (x1+x2)^2, data=air)
 summary(air.lm)
 
 sapply(air, range)

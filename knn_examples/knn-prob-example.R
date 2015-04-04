@@ -1,4 +1,4 @@
-library(class)
+require(class)
 
 # wine <- data(wine)
 wine <- read.csv("R-Study/knn_examples/wine.data",header=FALSE)
@@ -7,11 +7,11 @@ colnames(wine) <- c("class","Alcohol","Malic Acid","Ash","Alcalinity of Ash","Ma
                     "Color Intensity","Hue","0D280/OD315 of Diluted Wines","Proline")
 
 # train
-train <- rbind(wine[1:30,2:14], wine[60:90,2:14], wine[131:161,2:14]) 
+train <- rbind(wine[1:30,2:14], wine[60:90,2:14], wine[131:161,2:14])
 train.label <- factor(c(wine[1:30,1], wine[60:90,1], wine[131:161,1]))
 
 # test
-test <- rbind(wine[31:59,2:14], wine[61:130,2:14], wine[161:178,2:14]) 
+test <- rbind(wine[31:59,2:14], wine[61:130,2:14], wine[161:178,2:14])
 test.label <- factor(c(wine[31:59,1], wine[61:130,1], wine[161:178,1]))
 
 # knn

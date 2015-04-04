@@ -1,5 +1,5 @@
 # install.packages("lawstat")
-library(lawstat)
+require(lawstat)
 
 x <- c(1,2,1,1,1,1,1,1,1,1,2,4,1,1)
 y <- c(3,3,4,3,1,2,3,1,1,5,4)
@@ -9,5 +9,5 @@ brunner.munzel.test(x, y)
 # 95 percent confidence interval:
 #  0.5952169 0.9827052
 # sample estimates:
-# P(X<Y)+.5*P(X=Y) 
-#         0.788961 
+# P(X<Y)+.5*P(X=Y)
+#         0.788961

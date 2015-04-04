@@ -1,7 +1,7 @@
 # install.packages("randomForest")
-library(randomForest)
-library(rpart) 
-library(RColorBrewer)
+require(randomForest)
+require(rpart)
+require(RColorBrewer)
 
 # random sampling
 n <- nrow(iris)
@@ -31,5 +31,5 @@ screen(3); partialPlot(forest, iris, Petal.Length, "setosa")
 screen(4); partialPlot(forest, iris, Petal.Length, "versicolor")
 screen(5); partialPlot(forest, iris, Petal.Length, "virginica")
 split.screen(c(2,1), screen = 1)
-screen(1); plot(forest) 
+screen(1); plot(forest)
 close.screen(all=T)
