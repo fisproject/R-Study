@@ -39,7 +39,7 @@ plot3d(air$Wind, air$Temp, air$Ozone,
 	xlab = "wind", ylab = "temp", zlab = "ozone",
 	size = 1, type = "s", col = "blue")
 
-# add predict
+# Add plot
 air.pre = predict(air.lm)
 plot3d(air$Wind, air$Temp, air.pre,
 	xlab = "wind", ylab = "temp", zlab = "ozone",
