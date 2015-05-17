@@ -7,21 +7,21 @@ schools_code <- '
     real<lower=0> sigma[J]; // 標準偏差
   }
 
-  parameters {
-    real mu; // 推定したいパラメータ
+  parameters { // 推定するパラメータ
+    real mu; // 定数
     real<lower=0> tau; // 個体差
     real eta[J]; // 個体差のバラツキ
   }
 
-  transformed parameters {
+  transformed parameters { // ハイパーパラメータの情報
     real theta[J];
     for (j in 1:J)
-      theta[j] <- mu + tau * eta[j]; // muとtauを使ってthetaを算出
+      theta[j] <- mu + tau * eta[j]; // muとtauからthetaを算出
   }
 
   model {
-    eta ~ normal(0, 1); // etaは平均0, 分散1の正規分布モデル
-    y ~ normal(theta, sigma); // yは平均theta, 標準偏差sigmaの正規分布モデル
+    eta ~ normal(0, 1); // etaを標準正規分布で推定
+    y ~ normal(theta, sigma); // yを平均(theta), 標準偏差(sigma)の正規分布で推定
   }
 '
 # schools_dat
@@ -58,6 +58,7 @@ a <- extract(fit2, permuted=FALSE)
 a2 <- as.array(fit2)
 m <- as.matrix(fit2)
 
+traceplot(fit, ask=T)
 print(fit, digits=1)
 # Inference for Stan model: schools_code.
 # 4 chains, each with iter=1000; warmup=500; thin=1;
