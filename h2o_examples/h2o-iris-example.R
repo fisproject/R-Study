@@ -26,29 +26,34 @@ res.err.dl<-rep(0, len)
 # k-fold
 num <- sample(nrow(iris), nrow(iris))
 
-for(i in 1:len){
-  iris.train <- iris[-num[i],]
-  iris.test <- iris[num[i],]
+iris.train <- iris[-num[1:75],]
+iris.test <- iris[num[76:150],]
 
-  # Deep Learning
-  model <- h2o.deeplearning(
-     x=1:4,
-     y=5,
-     data=iris.train,
-     activation="Tanh",
-     hidden=rep(20,2)
-   )
-  pred.dl <- h2o.predict(model, newdata=iris.test[,-5])
+# Deep Learning
+model <- h2o.deeplearning(
+   x=1:4,
+   y=5,
+   data=iris.train,
+   activation="TanhWithDropout",
+   epochs=128, # Iteration
+   hidden=rep(20,2), # unit & layer
+   input_dropout_ratio = 0.2,
+   classification=TRUE
+   # autoencoder=TRUE
+)
 
-  pred.dl.df <- as.data.frame(pred.dl)
-  test.dl.df <- as.data.frame(iris.test)
+pred.dl <- h2o.predict(model, newdata=iris.test[,-5])
 
-  # correct is 0, false is 1
+pred.dl.df <- as.data.frame(pred.dl)
+test.dl.df <- as.data.frame(iris.test)
+
+# correct is 0, false is 1
+for(i in 1:len) {
   res.err.dl[i] <- ifelse(as.character(pred.dl.df[1,1]) == as.character(test.dl.df[1,5]), 0, 1)
 }
 
 # Error rate
 sum(res.err.dl/len)
-# [1] 0.08
+# [1] 0
 
 h2o.shutdown(h)

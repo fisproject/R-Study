@@ -19,14 +19,17 @@ pred <- predict(model, as.matrix(data$"2"[,1:4]))
 table(as.integer(data$"2"[,5])-1, pred)
 # pred
 #   0  1  2
-# 0 26  0  0
-# 1  0 25  0
-# 2  0  1 23
+# 0 28  0  0
+# 1  0 24  3
+# 2  0  2 18
+
+sum(ifelse(as.integer(data$"2"[,5])-1 == pred, 0, 1)) / (nrow(iris)/k)
+# [1] 0.06666667
 
 imp <- xgb.importance(names(iris), model=model)
 print(imp)
-# Feature       Gain     Cover      Frequence
-# 1:  Petal.Width 0.53568637 0.2162732 0.1150855
-# 2:      Species 0.41282008 0.1875520 0.1454121
-# 3: Petal.Length 0.03220073 0.3496323 0.4494557
-# 4:  Sepal.Width 0.01929283 0.2465425 0.2900467
+# Feature        Gain      Cover  Frequence
+# 1: Petal.Length 0.882104244 0.52692315 0.44000000
+# 2:  Petal.Width 0.103582149 0.25266661 0.24153846
+# 3:  Sepal.Width 0.008033523 0.06575587 0.09384615
+# 4: Sepal.Length 0.006280085 0.15465438 0.22461538
