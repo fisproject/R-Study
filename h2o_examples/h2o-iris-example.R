@@ -37,7 +37,7 @@ model <- h2o.deeplearning(
    activation="TanhWithDropout",
    epochs=128, # Iteration
    hidden=rep(20,2), # unit & layer
-   input_dropout_ratio = 0.2,
+   input_dropout_ratio=0.2,
    classification=TRUE
    # autoencoder=TRUE
 )

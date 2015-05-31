@@ -28,19 +28,25 @@ istrain=rep(0, n)
 istrain[tindex]=1
 
 # train the SVM
-svp <- ksvm(xtrain, ytrain, type="C-svc", kernel="vanilladot", C=100, scaled=c())
+model <- ksvm(xtrain,
+              ytrain,
+              type="C-svc",
+              kernel="vanilladot",
+              C=100,
+              scaled=c()
+         )
 
-# Look and understand what svp contains
+# Look and understand what model contains
 # General summary
-svp
+print(model)
 
 # Attributes that you can access
-attributes(svp)
+attributes(model)
 
 # For example, the support vectors
-alpha(svp)
-alphaindex(svp)
-b(svp)
+alpha(model)
+alphaindex(model)
+b(model)
 
 # Use the built-in function to pretty-plot the classifier
-plot(svp,data=xtrain)
+plot(model,data=xtrain)
