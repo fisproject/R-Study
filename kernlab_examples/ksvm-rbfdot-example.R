@@ -4,8 +4,8 @@ model <- ksvm(
            Species ~., data=iris,
            type="C-bsvc",         # method
            kernel="rbfdot",
-           kpar=list(sigma=0.2),  # kernel param
-           C=5,                   # C param
+           kpar=list(sigma=0.2),  # kernel param sigma
+           C=5,                   # margin param C
            prob.model=TRUE        # probabilities
          )
 

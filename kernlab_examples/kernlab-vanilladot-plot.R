@@ -32,7 +32,7 @@ model <- ksvm(xtrain,
               ytrain,
               type="C-svc",
               kernel="vanilladot",
-              C=100,
+              C=100, # margin param C
               scaled=c()
          )
 
