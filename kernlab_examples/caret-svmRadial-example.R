@@ -12,7 +12,7 @@ cOrange <- "#f39800"
 cLightBlue <- "#0068b7"
 qcolours <- c(cCyan, cMagenta, cGreen, cOrange, cLightBlue)
 
-grid <- expand.grid(.C=((2:10)*0.5), .sigma=((1:10)*0.01))
+grid <- expand.grid(.C=((2:10)*0.5), .gamma=((1:10)*0.01))
 ctrl <- trainControl(method="cv", savePred=T, classProb=T, number=3)
 
 # svmRadial : gaussian kernel
@@ -37,11 +37,11 @@ R2(svmFit$pred$pred, svmFit$pred$obs, formula="traditional", na.rm=FALSE)
 
 # results
 res.C <- svmFit$results$C
-res.sigma <- svmFit$results$sigma
+res.gamma <- svmFit$results$gamma
 res.acc <- svmFit$results$Accuracy
 
 # ggplot
-p <- ggplot(svmFit$pred,aes(x=res.C,y=res.sigma))
+p <- ggplot(svmFit$pred,aes(x=res.C,y=res.gamma))
 p + geom_point(aes(colour=res.acc), size=5) + scale_colour_gradient(low=cLightBlue, high=cOrange)
 
 model <- ksvm(Species~.,
@@ -49,7 +49,7 @@ model <- ksvm(Species~.,
               type="C-svc",
               kernel="rbfdot",
               C=tune$C,
-              kpar=list(sigma=tune$sigma)
+              kpar=list(gamma=tune$gamma)
          )
 
 iris.res <- predict(model,iris)

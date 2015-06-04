@@ -3,7 +3,7 @@ require(caret)
 require(e1071)
 require(kernlab)
 
-grid <- expand.grid(.C=((2:20)*0.5), .sigma=((1:10)*0.01))
+grid <- expand.grid(.C=((2:20)*0.5), .gamma=((1:10)*0.01))
 ctrl <- trainControl(method="cv", savePred=T, classProb=T, number=3)
 
 # svmLinear : Linear kernel

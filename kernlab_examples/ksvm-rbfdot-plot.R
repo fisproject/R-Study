@@ -8,7 +8,7 @@ datas <- data.frame(iris[51:150,3:4], y)
 ir.ksvm <- ksvm(y ~.,
                data=datas,
                kernel="rbfdot",
-               kpar=list(sigma=0.2), # kernel param sigma
+               kpar=list(gamma=0.2), # kernel param gamma
                C=5, # margin param C
                cross=3
            )
