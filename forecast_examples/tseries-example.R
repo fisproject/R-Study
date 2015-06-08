@@ -1,6 +1,5 @@
-# install.packages("forecast")
-require(forecast)
-require(quantmod)
+# install.packages("tseries")
+require(tseries)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
@@ -25,8 +24,18 @@ data <- data.frame(
 
 data.zoo <- zoo(data$Close, order.by=as.Date(data$Date, format='%Y/%m/%d'))
 # time series
-data.ts <- ts(data.zoo, frequency=245)
+data.ts <- ts(data.zoo)
 
-# decompose : data = seasonal + trend + residualError
-stl <- stl(data.ts, "periodic")
-plot(stl)
+adf.test(data.ts)
+# Augmented Dickey-Fuller Test
+#
+# data:  data.ts
+# Dickey-Fuller = -2.506, Lag order = 10, p-value = 0.3641
+# alternative hypothesis: stationary
+
+adf.test(diff(data.ts))
+# Augmented Dickey-Fuller Test
+#
+# data:  diff(data.ts)
+# Dickey-Fuller = -10.6537, Lag order = 10, p-value = 0.01
+# alternative hypothesis: stationary
