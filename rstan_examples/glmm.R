@@ -7,6 +7,14 @@ frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
 d <- as.data.frame(read.csv(file="data/data.csv"))
+# > head(d)
+#   N y x id
+# 1 8 0 2  1
+# 2 8 1 2  2
+# 3 8 2 2  3
+# 4 8 4 2  4
+# 5 8 1 2  5
+# 6 8 0 2  6
 
 d.glmm <- glmmML(
     cbind(y, N-y) ~ x,

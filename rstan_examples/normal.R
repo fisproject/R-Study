@@ -53,12 +53,11 @@ stan_code <- '
     real alpha;
     real<lower=0> e;
     real<lower=0> s;
-
   }
 
   model {
     for(i in 1:N)
-      y[i] ~ normal((x[i] * alpha) + e, s);
+      y[i] ~ normal(x[i] * alpha + e, s);
   }
 '
 
