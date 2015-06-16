@@ -2,26 +2,26 @@ require(rstan)
 
 schools_code <- '
   data {
-    int<lower=0> J; // サンプル数
+    int<lower=0> J; // サンプルサイズ
     real y[J]; // コーチング効果
     real<lower=0> sigma[J]; // 標準偏差
   }
 
-  parameters { // 推定するパラメータ
+  parameters {
     real mu; // 定数
-    real<lower=0> tau; // 個体差
-    real eta[J]; // 個体差のバラツキ
+    real<lower=0> tau; // etaの係数
+    real eta[J]; // 個体差
   }
 
-  transformed parameters { // ハイパーパラメータの情報
+  transformed parameters {
     real theta[J];
     for (j in 1:J)
-      theta[j] <- mu + tau * eta[j]; // muとtauからthetaを算出
+      theta[j] <- mu + tau * eta[j]; // 個体ごとの平均
   }
 
   model {
-    eta ~ normal(0, 1); // etaを標準正規分布で推定
-    y ~ normal(theta, sigma); // yを平均(theta), 標準偏差(sigma)の正規分布で推定
+    eta ~ normal(0, 1); // etaを標準正規分布(0, 1)で推定
+    y ~ normal(theta, sigma); // yを正規分布(theta, sigma)で推定
   }
 '
 # schools_dat

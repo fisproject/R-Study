@@ -26,6 +26,11 @@ summary(d.glm)
 # Residual deviance:  5.9736  on 8  degrees of freedom
 # AIC: 29.001
 
+# odds ratio
+exp(d.glm$coefficients)
+# (Intercept)           x
+#  0.01868493  1.95680129
+
 stan_code <- '
   data {
     int<lower=1> N;
