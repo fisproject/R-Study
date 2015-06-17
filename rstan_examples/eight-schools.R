@@ -1,4 +1,5 @@
 require(rstan)
+require(coda)
 
 schools_code <- '
   data {
@@ -42,24 +43,10 @@ schools_dat <- list(J = 8,
                     y = c(28,  8, -3,  7, -1,  1, 18, 12),
                     sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
 
-fit <- stan(model_code=schools_code, data=schools_dat, iter=1000, chains=4)
-fit2 <- stan(fit=fit, data=schools_dat, iter=10000, chains=4)
+# model.fit <- stan(model_code=schools_code, data=schools_dat, iter=1000, chains=4)
 
-print(fit2)
-plot(fit2)
-
-la <- extract(fit2, permuted=TRUE) # return a list of arrays
-mu <- la$mu
-
-### return an array of three dimensions: iterations, chains, parameters
-a <- extract(fit2, permuted=FALSE)
-
-### use S3 functions as.array (or as.matrix) on stanfit objects
-a2 <- as.array(fit2)
-m <- as.matrix(fit2)
-
-traceplot(fit, ask=T)
-print(fit, digits=1)
+# traceplot(model.fit, ask=T)
+print(model.fit, digits=1)
 # Inference for Stan model: schools_code.
 # 4 chains, each with iter=1000; warmup=500; thin=1;
 # post-warmup draws per chain=500, total post-warmup draws=2000.
@@ -84,3 +71,12 @@ print(fit, digits=1)
 # theta[7] 10.7     0.2 6.9  -1.6  6.0 10.0 14.5  25.9   898    1
 # theta[8]  8.6     0.4 8.0  -5.9  3.7  8.1 12.9  26.6   476    1
 # lp__     -4.8     0.1 2.6 -10.5 -6.4 -4.6 -3.0  -0.5   574    1
+
+model.fit.coda <- mcmc.list(
+                    lapply(
+                      1:ncol(model.fit),
+                      function(x) mcmc(as.array(model.fit)[,x,])
+                    )
+                  )
+
+plot(model.fit.coda)
