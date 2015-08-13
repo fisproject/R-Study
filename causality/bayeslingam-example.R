@@ -6,7 +6,7 @@ frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
-# load bayeslingam
+# load bayeslingam : http://www.cs.helsinki.fi/group/neuroinf/lingam/bayeslingam/
 source('./../../trunk/main/loud.R')
 loud()
 
@@ -51,6 +51,7 @@ p <- p + geom_bar(width=0.5, stat="identity") + labs(title="", x="index", y="pro
 plot(p)
 ggsave("./img/prob-ex1.png", p)
 
+
 # ex2) x2→x1
 X2 <- runif(10000, -sqrt(3), sqrt(3))
 X1 <- sqrt(2/3) * X2 + runif(10000,-1,1)
@@ -91,6 +92,7 @@ p <- p + geom_bar(width=0.5, stat="identity") + labs(title="", x="index", y="pro
 plot(p)
 ggsave("./img/prob-ex2.png", p)
 
+
 # ex3) x1 x2
 X1 <- runif(10000, -sqrt(3), sqrt(3))
 X2 <- runif(10000, -sqrt(3), sqrt(3))
@@ -129,6 +131,7 @@ p <- ggplot(d.prob,
 p <- p + geom_bar(width=0.5, stat="identity") + labs(title="", x="index", y="prob")
 plot(p)
 ggsave("./img/prob-ex3.png", p)
+
 
 # ex4) x1->x2
 X1 <- rnorm(10000, 0, 1)
