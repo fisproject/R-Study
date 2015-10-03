@@ -1,7 +1,11 @@
 require(class)
 
+frame_files <- lapply(sys.frames(), function(x) x$ofile)
+frame_files <- Filter(Negate(is.null), frame_files)
+setwd(dirname(frame_files[[length(frame_files)]]))
+
 # wine <- data(wine)
-wine <- read.csv("R-Study/knn_examples/wine.data",header=FALSE)
+wine <- read.csv("data/wine.data", header=FALSE)
 colnames(wine) <- c("class","Alcohol","Malic Acid","Ash","Alcalinity of Ash","Magnesium",
                     "Total Phenols","Flavanoids","Nonflavanoid Phenols","Proanthocyanins",
                     "Color Intensity","Hue","0D280/OD315 of Diluted Wines","Proline")
