@@ -1,4 +1,4 @@
-require(stats)
+require(useful)
 require(ggplot2)
 
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
@@ -30,20 +30,44 @@ pca <- prcomp(wine.nonlabeled, scale=TRUE)
 pc1 <- pca$x[,1]
 pc2 <- pca$x[,2]
 
-r <- data.frame(x=pc1, y=pc2, ctg=as.factor(wine.km$cluster), label=wine.class)
+r <- data.frame(x=pc1, y=pc2, cluster=as.factor(wine.km$cluster), label=wine.class)
 
 g <- ggplot(
   r,
   aes(
       x = x,
       y = y,
-      label = label
+      shape = label
   )
 )
 
-p <- g + geom_point(aes(colour=ctg), size=5) +
+p <- g + geom_point(aes(colour=cluster), size=4) +
       labs(title='K-means', x="PC1", y="PC2") +
-      scale_colour_hue() +
-      geom_text(family="HiraMaruProN-W4", size=3)
+      scale_colour_hue()
 
 plot(p)
+
+# Hartigan's Method
+wine.fit <- FitKMeans(wine.nonlabeled, max.clusters=20, nstart=25, seed=12345)
+# Clusters  Hartigan AddCluster
+# 1         2 69.523332       TRUE
+# 2         3 52.151051       TRUE
+# 3         4 15.207285       TRUE
+# 4         5 11.604607       TRUE
+# 5         6  9.896997      FALSE
+# 6         7  9.771937      FALSE
+# 7         8 10.969714       TRUE
+# 8         9  7.562533      FALSE
+# 9        10  8.752139      FALSE
+# 10       11  8.474434      FALSE
+# 11       12  6.283500      FALSE
+# 12       13  5.780901      FALSE
+# 13       14  5.707151      FALSE
+# 14       15  4.512510      FALSE
+# 15       16  4.813462      FALSE
+# 16       17  4.508877      FALSE
+# 17       18  5.790036      FALSE
+# 18       19  5.384525      FALSE
+# 19       20  2.358511      FALSE
+
+PlotHartigan(wine.fit)
