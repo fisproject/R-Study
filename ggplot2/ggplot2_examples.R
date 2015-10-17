@@ -1,4 +1,3 @@
-# install.packages("ggplot2")
 require(ggplot2)
 
 # change working directory
@@ -48,4 +47,4 @@ g <- p + geom_histogram(alpha = 0.3, position = "identity", size = 1) +
       labs(title="Iris", x="Length") +
       geom_density(alpha = 0)
 plot(g)
-ggsave("iris-hist.png", g)
+ggsave("img/iris-hist.png", g)
