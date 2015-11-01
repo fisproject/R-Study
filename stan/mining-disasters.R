@@ -46,10 +46,10 @@ stan_code <- '
         vector[T] lp;
         lp <- rep_vector(log_unif, T);
         for (s in 1:T){
-        	 for (t in 1:T){
+           for (t in 1:T){
             // パラメータ λ のポアソン分布に従うが s 時点で e, l と変化する
-        	 	lp[s] <- lp[s] + poisson_log(d[t], if_else(t < s, e, l));
-        	 }
+            lp[s] <- lp[s] + poisson_log(d[t], if_else(t < s, e, l));
+           }
         }
   }
 
