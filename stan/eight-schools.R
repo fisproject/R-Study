@@ -39,9 +39,11 @@ schools_code <- '
 # G  18  10
 # H  12  18
 
-schools_dat <- list(J = 8,
-                    y = c(28,  8, -3,  7, -1,  1, 18, 12),
-                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
+schools_dat <- list(
+                  J=8,
+                  y=c(28,8,-3,7,-1,1,18,12),
+                  sigma=c(15,10,16,11,9,11,10,18)
+               )
 
 # model.fit <- stan(model_code=schools_code, data=schools_dat, iter=1000, chains=4)
 

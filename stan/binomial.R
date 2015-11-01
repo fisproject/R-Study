@@ -2,9 +2,9 @@ require(rstan)
 
 d <- data.frame(
         N=10,
-        x=c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
-        y=c(0, 0, 1, 2, 4, 7, 8, 7, 8, 9)
-  )
+        x=c(1,2,3,4,5,6,7,8,9,10),
+        y=c(0,0,1,2,4,7,8,7,8,9)
+     )
 
 d.glm <- glm(
     cbind(y, N-y) ~ x,
@@ -50,10 +50,10 @@ stan_code <- '
 '
 
 d.list <- list(
-    N=10,
-    x=d$x,
-    y=d$y
-  )
+            N=10,
+            x=d$x,
+            y=d$y
+          )
 
 d.fit <- stan(model_code=stan_code, data=d.list, iter=1000, chains=4)
 print(d.fit, digit=2)

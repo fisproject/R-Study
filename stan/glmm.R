@@ -6,7 +6,7 @@ frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
-d <- as.data.frame(read.csv(file="data/data.csv"))
+d <- as.data.frame(read.csv(file="data/seeds.csv"))
 # > head(d)
 #   N y x id
 # 1 8 0 2  1
