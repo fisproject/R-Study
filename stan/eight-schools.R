@@ -45,7 +45,7 @@ schools_dat <- list(
                   sigma=c(15,10,16,11,9,11,10,18)
                )
 
-# model.fit <- stan(model_code=schools_code, data=schools_dat, iter=1000, chains=4)
+model.fit <- stan(model_code=schools_code, data=schools_dat, iter=1000, chains=4)
 
 # traceplot(model.fit, ask=T)
 print(model.fit, digits=1)
