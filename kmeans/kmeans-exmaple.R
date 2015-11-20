@@ -5,6 +5,8 @@ frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
+set.seed(12345)
+
 wine <- read.csv("data/wine.data", header=FALSE)
 colnames(wine) <- c("class","Alcohol","Malic Acid","Ash","Alcalinity of Ash","Magnesium",
                     "Total Phenols","Flavanoids","Nonflavanoid Phenols","Proanthocyanins",
@@ -13,8 +15,6 @@ colnames(wine) <- c("class","Alcohol","Malic Acid","Ash","Alcalinity of Ash","Ma
 wine.class <- as.factor(wine[,c(1)])
 wine <- scale(wine)
 wine.nonlabeled <- wine[,c(-1)]
-
-set.seed(12345)
 
 # K-means
 wine.km <- kmeans(wine.nonlabeled, centers=3)
@@ -30,7 +30,37 @@ pca <- prcomp(wine.nonlabeled, scale=TRUE)
 pc1 <- pca$x[,1]
 pc2 <- pca$x[,2]
 
-r <- data.frame(x=pc1, y=pc2, cluster=as.factor(wine.km$cluster), label=wine.class)
+summary(pca)
+# Importance of components:
+#                          PC1    PC2    PC3     PC4     PC5     PC6     PC7     PC8     PC9   PC10
+# Standard deviation     2.169 1.5802 1.2025 0.95863 0.92370 0.80103 0.74231 0.59034 0.53748 0.5009
+# Proportion of Variance 0.362 0.1921 0.1112 0.07069 0.06563 0.04936 0.04239 0.02681 0.02222 0.0193
+# Cumulative Proportion  0.362 0.5541 0.6653 0.73599 0.80162 0.85098 0.89337 0.92018 0.94240 0.9617
+
+pca$rotation
+#                                PC1          PC2         PC3         PC4         PC5
+# Alcohol                      -0.144329395  0.483651548 -0.20738262  0.01785630 -0.26566365
+# Malic Acid                    0.245187580  0.224930935  0.08901289 -0.53689028  0.03521363
+# Ash                           0.002051061  0.316068814  0.62622390  0.21417556 -0.14302547
+# Alcalinity of Ash             0.239320405 -0.010590502  0.61208035 -0.06085941  0.06610294
+# Magnesium                    -0.141992042  0.299634003  0.13075693  0.35179658  0.72704851
+# Total Phenols                -0.394660845  0.065039512  0.14617896 -0.19806835 -0.14931841
+# Flavanoids                   -0.422934297 -0.003359812  0.15068190 -0.15229479 -0.10902584
+# Nonflavanoid Phenols          0.298533103  0.028779488  0.17036816  0.20330102 -0.50070298
+# Proanthocyanins              -0.313429488  0.039301722  0.14945431 -0.39905653  0.13685982
+# Color Intensity               0.088616705  0.529995672 -0.13730621 -0.06592568 -0.07643678
+# Hue                          -0.296714564 -0.279235148  0.08522192  0.42777141 -0.17361452
+# 0D280/OD315 of Diluted Wines -0.376167411 -0.164496193  0.16600459 -0.18412074 -0.10116099
+# Proline                      -0.286752227  0.364902832 -0.12674592  0.23207086 -0.15786880
+
+biplot(pca, choices=c(1, 2))
+
+r <- data.frame(
+  x=pc1,
+  y=pc2,
+  cluster=as.factor(wine.km$cluster),
+  label=wine.class
+)
 
 g <- ggplot(
   r,

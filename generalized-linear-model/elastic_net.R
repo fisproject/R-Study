@@ -41,17 +41,23 @@ acsY <- build.y(
   data=acs
 )
 
+acs.glmnet <- glmnet(x=acsX, y=acsY, family='binomial', alpha=1)
+
 # Cross Validation - Lasso
 acs.cv1 <- cv.glmnet(x=acsX, y=acsY, family='binomial', nfold=5, alpha=1)
 acs.cv1$lambda.min
 acs.cv1$lambda.1se # one standard deviation
 plot(acs.cv1, main='Lasso alpha=1.0')
 
+acs.cv1.vi <- acs.glmnet$beta[, match(acs.cv1$lambda.min, acs.cv1$lambda)] # variable importance
+dotchart(tail(sort(acs.cv1.vi), 30), main="variable importance")
+
 coef(acs.cv1, s='lambda.1se') # var selection
 coefplot(acs.cv1, 'Coefficient Plot (alpha=1.0)')
 
-plot(acs.cv1$glmnet.fit, xvar='lambda')
+plot(acs.cv1$glmnet.fit, xvar='lambda', main='solution path (alpha=1.0)', label=TRUE) # solution path
 abline(v=log(c(acs.cv1$lambda.min, acs.cv1$lambda.1se)), lty=2)
+
 
 # Cross Validation - Ridge
 acs.cv2 <- cv.glmnet(x=acsX, y=acsY, family='binomial', nfold=5, alpha=0)
@@ -62,7 +68,7 @@ plot(acs.cv2, main='Ridge (alpha=0.0)')
 coef(acs.cv2, s='lambda.1se')
 coefplot(acs.cv2, 'Coefficient Plot (alpha=0.0)')
 
-plot(acs.cv2$glmnet.fit, xvar='lambda')
+plot(acs.cv2$glmnet.fit, xvar='lambda', main='solution path (alpha=0.0)', label=TRUE) # solution path
 abline(v=log(c(acs.cv2$lambda.min, acs.cv2$lambda.1se)), lty=2)
 
 
@@ -75,5 +81,8 @@ plot(acs.cv3, main='alpha=0.70')
 coef(acs.cv3, s='lambda.1se')
 coefplot(acs.cv3, 'Coefficient Plot (alpha=0.70)')
 
-plot(acs.cv3$glmnet.fit, xvar='lambda')
+acs.cv3.vi <- acs.glmnet$beta[, match(acs.cv3$lambda.min, acs.cv3$lambda)] # variable importance
+dotchart(tail(sort(acs.cv3.vi), 30), main="variable importance")
+
+plot(acs.cv3$glmnet.fit, xvar='lambda', main='solution path (alpha=0.7)', label=TRUE) # solution path
 abline(v=log(c(acs.cv3$lambda.min, acs.cv3$lambda.1se)), lty=2)
