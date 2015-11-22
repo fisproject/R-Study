@@ -1,19 +1,24 @@
 require(kernlab)
 
-set.seed(10)
+set.seed(1500)
 
 y <- as.matrix(iris[51:150, 5])
 datas <- data.frame(iris[51:150,3:4], y)
 
-ir.ksvm <- ksvm(y ~.,
-               data=datas,
-               kernel="rbfdot",
-               kpar=list(gamma=0.2), # kernel param gamma
-               C=5, # margin param C
-               cross=3
-           )
+ir.ksvm <- ksvm(
+  y ~ .,
+  data=datas,
+  kernel="rbfdot",
+  kpar=list(sigma=0.2), # kernel param gamma
+  C=5, # margin param C
+  cross=3
+)
 
 print(ir.ksvm)
 
 plot(ir.ksvm,data=datas[, 1:2])
+
 table(datas$y,predict(ir.ksvm,datas[, 1:2]))
+#             versicolor virginica
+# versicolor         47         3
+# virginica           3        47

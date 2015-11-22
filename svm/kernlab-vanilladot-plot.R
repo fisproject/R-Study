@@ -28,13 +28,14 @@ istrain=rep(0, n)
 istrain[tindex]=1
 
 # train the SVM
-model <- ksvm(xtrain,
-              ytrain,
-              type="C-svc",
-              kernel="vanilladot",
-              C=100, # margin param C
-              scaled=c()
-         )
+model <- ksvm(
+  xtrain,
+  ytrain,
+  type="C-svc",
+  kernel="vanilladot",
+  C=100, # margin param C
+  scaled=c()
+)
 
 # Look and understand what model contains
 # General summary
