@@ -13,6 +13,7 @@ colnames(wine) <- c("class","Alcohol","Malic Acid","Ash","Alcalinity of Ash","Ma
                     "Color Intensity","Hue","0D280/OD315 of Diluted Wines","Proline")
 
 wine.class <- as.factor(wine[,c(1)])
+wine.index <- c(1:nrow(wine))
 wine <- scale(wine)
 wine.nonlabeled <- wine[,c(-1)]
 
@@ -59,22 +60,27 @@ r <- data.frame(
   x=pc1,
   y=pc2,
   cluster=as.factor(wine.km$cluster),
-  label=wine.class
+  label=wine.class,
+  index=wine.index
 )
 
 g <- ggplot(
   r,
   aes(
-      x = x,
-      y = y,
-      shape = label
+    x=x,
+    y=y,
+    shape=label
   )
 )
 
 p <- g + geom_point(aes(colour=cluster), size=4) +
       labs(title='K-means', x="PC1", y="PC2") +
       scale_colour_hue()
+plot(p)
 
+p <- g + geom_point(aes(colour=cluster), size=4) +
+      labs(title='K-means', x="PC1", y="PC2") + scale_colour_hue() +
+      geom_text(aes(label=index), hjust=0, vjust=0, size=4)
 plot(p)
 
 # Hartigan's Method
