@@ -1,14 +1,18 @@
-d <- matrix(c(2, 10, 15, 3), nrow=2,
-           dimnames=list(c("man", "woman"), c("bicycle", "walk")))
-
-#       bicycle walk
-# man         2   15
-# woman      10    3
-
-# Chi-squared test
-chisq.test(d)
-# X-squared = 10.4581, df = 1, p-value = 0.001221
+d <- matrix(
+  c(2, 10, 15, 3),
+  nrow=2,
+  dimnames=list(c("male", "female"), c("bicycle", "walk"))
+)
+#         bicycle walk
+# male         2   15
+# female      10    3
 
 # Fisher exact test
 fisher.test(d)
 # p-value = 0.0005367
+# alternative hypothesis: true odds ratio is not equal to 1
+# 95 percent confidence interval:
+#  0.003325764 0.363182271
+# sample estimates:
+# odds ratio
+# 0.04693661

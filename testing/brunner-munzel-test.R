@@ -1,4 +1,3 @@
-# install.packages("lawstat")
 require(lawstat)
 
 x <- c(1,2,1,1,1,1,1,1,1,1,2,4,1,1)

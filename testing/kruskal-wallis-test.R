@@ -1,10 +1,8 @@
 # Kruskal–Wallis-Test
-
 require(dplyr)
 
 # iris
 kruskal.test(Sepal.Length ~ Petal.Width, data=iris)
-#
 # Kruskal-Wallis rank sum test
 #
 # data:  Sepal.Length by Petal.Width
@@ -12,34 +10,31 @@ kruskal.test(Sepal.Length ~ Petal.Width, data=iris)
 
 # iris - setosa
 se <- iris %>% filter(Species == 'setosa')
-kruskal.test(list(se$Sepal.Length, se$Width, se$Sepal.Length, se$Petal.Width))
+kruskal.test(Sepal.Length ~  Petal.Width, data=se)
 
 # iris - versicolor
 ve <- iris %>% filter(Species == 'versicolor')
-kruskal.test(ve$Sepal.Length, ve$Width, ve$Sepal.Length, ve$Petal.Width)
+kruskal.test(Sepal.Length ~ Petal.Width, data=ve)
 
 # iris - virginica
 vi <- iris %>% filter(Species == 'virginica')
-kruskal.test(vi$Sepal.Length, vi$Width, vi$Sepal.Length, vi$Petal.Width)
+kruskal.test(Sepal.Length ~ Petal.Width, data=vi)
+
 
 # airquality
 kruskal.test(Ozone ~ Month, data=airquality)
-# > # airquality
-# > kruskal.test(Ozone ~ Month, data=airquality)
-
 # 	Kruskal-Wallis rank sum test
 
 # data:  Ozone by Month
 # Kruskal-Wallis chi-squared = 29.2666, df = 4, p-value = 6.901e-06
 
-# Original Data
+
+# Virtual Data
 x=c(2.9, 3.0, 4.5, 3.6, 4.2, 3.5, 3.5, 4.4)
 y=c(3.8, 3.7, 4.0, 2.4)
 z=c(2.8, 3.4, 3.5, 4.2, 3.0, 3.1)
 
 kruskal.test(list(x, y, z))
-# > kruskal.test(list(x,y,z))
-
 # 	Kruskal-Wallis rank sum test
 
 # data:  list(x, y, z)
