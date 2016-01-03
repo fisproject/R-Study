@@ -18,7 +18,7 @@ coefplot <- function(model, title) {
       x = X1,
       y = reorder(Coefficient, X1)
     ))
-  g + geom_vline(xintercept = 0, color='grey', lineplot=2) +
+  g + geom_vline(xintercept = 0, color='grey', linetype=2) + # or lineplot ?
     geom_point(color='blue') + labs(x='Value', y='Coefficient', title=title)
 }
 

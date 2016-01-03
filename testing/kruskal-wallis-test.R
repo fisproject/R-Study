@@ -1,14 +1,26 @@
-# Kruskal–Wallis-Test Example
+# Kruskal–Wallis-Test
+
+require(dplyr)
 
 # iris
-kruskal.test(Sepal.Length ~ Petal.Width, data=iris) 
+kruskal.test(Sepal.Length ~ Petal.Width, data=iris)
+#
+# Kruskal-Wallis rank sum test
+#
+# data:  Sepal.Length by Petal.Width
+# Kruskal-Wallis chi-squared = 112.31, df = 21, p-value = 1.798e-14
 
 # iris - setosa
-kruskal.test(list(iris$Sepal.Length[1:50], iris$Sepal.Width[1:50], iris$Petal.Length[1:50], iris$Petal.Width[1:50])) 
+se <- iris %>% filter(Species == 'setosa')
+kruskal.test(list(se$Sepal.Length, se$Width, se$Sepal.Length, se$Petal.Width))
+
 # iris - versicolor
-kruskal.test(list(iris$Sepal.Length[51:100], iris$Sepal.Width[51:100], iris$Petal.Length[51:100], iris$Petal.Width[51:100])) 
+ve <- iris %>% filter(Species == 'versicolor')
+kruskal.test(ve$Sepal.Length, ve$Width, ve$Sepal.Length, ve$Petal.Width)
+
 # iris - virginica
-kruskal.test(list(iris$Sepal.Length[101:150], iris$Sepal.Width[101:150], iris$Petal.Length[101:150], iris$Petal.Width[101:150])) 
+vi <- iris %>% filter(Species == 'virginica')
+kruskal.test(vi$Sepal.Length, vi$Width, vi$Sepal.Length, vi$Petal.Width)
 
 # airquality
 kruskal.test(Ozone ~ Month, data=airquality)

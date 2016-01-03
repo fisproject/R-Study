@@ -1,11 +1,11 @@
-require(psych)
+require(GGally)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
-data <- read.csv("data/accident.csv")
+d <- read.csv("data/accident.csv")
 #     city post accident population
 # 1     1  160       58         85
 # 2     2  175       68         91
@@ -18,24 +18,10 @@ data <- read.csv("data/accident.csv")
 # 9     9  173       65         93
 # 10   10  168       61         90
 
-pairs(data, pch = 19)
+ggpairs(d)
 
-cor(data[3], data[4])
-# population
-# accident  0.8132599
+cor(d$accident, d$population, method="p")
+# [1] 0.8132599
 
-cor(data[2], data[3])
-# accident
-# post 0.7440411
-
-partial.r(data, c(2, 4), 3)
-# partial correlations
-#            post population
-# post       1.00       0.76
-# population 0.76       1.00
-
-partial.r(data, c(2, 3), 4)
-# partial correlations
-#          post accident
-# post     1.00     0.04
-# accident 0.04     1.00
+cor(d$accident, d$post, method="p")
+# [1] 0.7440411
