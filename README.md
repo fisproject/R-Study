@@ -10,4 +10,4 @@ R Examples
 [MIT](http://opensource.org/licenses/MIT)
 
 ## Author
-[fisproject](https://github.com/fisproject)
+[ttsy](https://github.com/fisproject)
