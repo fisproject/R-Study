@@ -11,28 +11,23 @@ p <- ggplot(
   d,
   aes(
       x = Sepal.Length,
-      y = Sepal.Width
+      y = Sepal.Width,
+      colour=Species
   )
 )
 
-# Gradient
-g <- p + geom_point(aes(size=Petal.Length, colour=Petal.Width), alpha=1) +
-      labs(title="Iris", x="Length", y="Width") +
-      scale_colour_gradient(low="cyan", high="magenta")
-plot(g)
-ggsave("img/iris-gradient.png", g)
-
 # Hue
-g <- p + geom_point(aes(size=Petal.Length, colour=Species), alpha=1) +
-      labs(title="Iris", x="Length", y="Width") +
-      scale_colour_hue()
+g <- p + geom_point() +
+    labs(title="Iris", x="Sepal.Length", y="Sepal.Width") +
+    scale_colour_hue()
+    # scale_colour_gradient(low="cyan", high="magenta")
 plot(g)
 ggsave("img/iris-hue.png", g)
 
 # Smoothing
-g <- p + geom_point(colour="magenta") +
-      labs(title="Iris", x="Length", y="Width") +
-      stat_smooth(method="lm")
+g <- p + geom_point() +
+    labs(title="Iris", x="Sepal.Length", y="Sepal.Width") +
+    stat_smooth(method="lm")
 plot(g)
 ggsave("img/iris-smooth.png", g)
 
@@ -48,7 +43,7 @@ p <- ggplot(
 )
 
 g <- p + geom_histogram(alpha=0.3, position="identity", size=1) +
-      labs(title="Iris", x="Length") +
+      labs(title="Iris", x="Sepal.Length") +
       geom_density(alpha=0)
 plot(g)
 ggsave("img/iris-hist.png", g)
@@ -67,7 +62,7 @@ plot(g)
 ggsave("img/iris-tile.png", g)
 
 # Tile
-g <- qplot(round(Sepal.Length), round(Sepal.Width), fill=Petal.Length, data=d, geom="tile") +
-      scale_fill_gradient(limits=c(0, 6), low="white", high="black")
+g <- qplot(Sepal.Length, Sepal.Width, fill=Petal.Length, data=d, geom="tile") +
+    scale_fill_gradient(limits=c(0, 6), low="white", high="black")
 plot(g)
 ggsave("img/iris-tile-qplot.png", g)
