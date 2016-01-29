@@ -1,15 +1,16 @@
 require(rstan)
 
+# change working directory
+frame_files <- lapply(sys.frames(), function(x) x$ofile)
+frame_files <- Filter(Negate(is.null), frame_files)
+setwd(dirname(frame_files[[length(frame_files)]]))
+
 d <- data.frame(
-        x=c(1,2,3,4,5,6,7,8,9,10),
-        y=c(9,8,10,9,11,12,11,12,14,15)
-     )
+    x=c(1,2,3,4,5,6,7,8,9,10),
+    y=c(9,8,10,9,11,12,11,12,14,15)
+)
 
-d.lm <- lm(
-    y ~ x,
-    data=d
-  )
-
+d.lm <- lm(y ~ x, data=d)
 summary(d.lm)
 # Coefficients:
 #             Estimate Std. Error t value Pr(>|t|)
@@ -26,7 +27,7 @@ d.glm <- glm(
     y ~ x,
     family=gaussian(link="identity"),
     data=d
-  )
+)
 
 summary(d.glm)
 # Coefficients:
@@ -42,32 +43,18 @@ summary(d.glm)
 # Residual deviance:  6.2061  on 8  degrees of freedom
 # AIC: 29.608
 
-stan_code <- '
-  data {
-    int<lower=1> N;
-    vector<lower=1>[N] x;
-    vector<lower=1>[N] y;
-  }
-
-  parameters {
-    real alpha;
-    real<lower=0> e;
-    real<lower=0> s;
-  }
-
-  model {
-    for(i in 1:N)
-      y[i] ~ normal(x[i] * alpha + e, s);
-  }
-'
-
 d.list <- list(
     N=10,
     x=d$x,
     y=d$y
-  )
+)
 
-d.fit <- stan(model_code=stan_code, data=d.list, iter=1000, chains=4)
+d.fit <- stan(
+    file='model/normal.stan',
+    data=d.list,
+    iter=1000,
+    chains=4
+)
 print(d.fit, digit=2)
 # Inference for Stan model: stan_code.
 # 4 chains, each with iter=1000; warmup=500; thin=1;

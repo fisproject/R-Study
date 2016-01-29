@@ -5,39 +5,19 @@ frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
-d <- read.csv("./data/income.csv", header=T)
-
-stan_code <- '
-  data {
-  	int<lower=0> N;
-  	real<lower=0> x[N];
-  }
-
-  parameters {
-  	real<lower=0> mu;
-  	real<lower=0>	sigma;
-  }
-
-  model {
-  	x ~ lognormal(mu, sigma);
-  }
-
-  generated quantities{
-  	real<lower=0>	zeta;
-    real<lower=0>	lower;
-    real<lower=0>	upper;
-  	zeta <- exp(mu);
-    lower <- exp(mu - 0.95 * sigma);
-    upper <- exp(mu + 0.95 * sigma);
-  }
-'
+d <- read.csv("data/income.csv", header=T)
 
 d.list <- list(
     N=length(d$income),
     x=d$income
-  )
+)
 
-d.fit <- stan(model_code=stan_code, data=d.list, iter=2000, chains=2)
+d.fit <- stan(
+    file='model/lognormal.stan',
+    data=d.list,
+    iter=2000,
+    chains=2
+)
 
 print(d.fit, digits=2)
 # Inference for Stan model: 0cea012b87f69ca2147d3277f751c103.
@@ -53,11 +33,8 @@ print(d.fit, digits=2)
 # lp__   -4.38    0.04   1.05  -7.31  -4.76  -4.04  -3.65   -3.41   589    1
 
 model.fit.coda <- mcmc.list(
-                    lapply(
-                      1:ncol(d.fit),
-                      function(x) mcmc(as.array(d.fit)[,x,])
-                    )
-                  )
+    lapply(1:ncol(d.fit), function(x) mcmc(as.array(d.fit)[,x,]))
+)
 plot(model.fit.coda)
 
 ex <- extract(d.fit)

@@ -1,15 +1,20 @@
 require(rstan)
 
+# change working directory
+frame_files <- lapply(sys.frames(), function(x) x$ofile)
+frame_files <- Filter(Negate(is.null), frame_files)
+setwd(dirname(frame_files[[length(frame_files)]]))
+
 d <- data.frame(
-        x=c(1,2,3,4,5,6,7,8,9,10),
-        y=c(44,32,26,20,14,9,7,4,2,1)
-     )
+    x=c(1,2,3,4,5,6,7,8,9,10),
+    y=c(44,32,26,20,14,9,7,4,2,1)
+)
 
 d.glm <- glm(
     y ~ x,
     family=poisson(link="log"),
     data=d
-  )
+)
 
 summary(d.glm)
 # Coefficients:
@@ -25,31 +30,18 @@ summary(d.glm)
 # Residual deviance:   2.6949  on 8  degrees of freedom
 # AIC: 47.803
 
-stan_code <- '
-  data {
-    int<lower=1> N;
-    int<lower=1> x[N];
-    int<lower=1> y[N];
-  }
-
-  parameters {
-    real beta0;
-    real beta1;
-  }
-
-  model {
-    for(i in 1:N)
-      y[i] ~ poisson_log(beta0 + beta1 * x[i]);
-  }
-'
-
 d.list <- list(
     N=10,
     x=d$x,
     y=d$y
-  )
+)
 
-d.fit <- stan(model_code=stan_code, data=d.list, iter=1000, chains=4)
+d.fit <- stan(
+    file='model/poisson.stan',
+    data=d.list,
+    iter=1000,
+    chains=4
+)
 print(d.fit, digit=2)
 # Inference for Stan model: stan_code.
 # 4 chains, each with iter=1000; warmup=500; thin=1;

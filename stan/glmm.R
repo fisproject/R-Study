@@ -21,7 +21,7 @@ d.glmm <- glmmML(
     family=binomial,
     cluster=id,
     data=d
-  )
+)
 
 summary(d.glmm)
 # coef se(coef)      z Pr(>|z|)
@@ -35,37 +35,19 @@ summary(d.glmm)
 #
 # Residual deviance: 269.4 on 97 degrees of freedom 	AIC: 275.4
 
-stan_code <- '
-  data {
-    int<lower=1> N;
-    int<lower=1> n;
-    int<lower=2, upper=6> x[n];
-    int<lower=0, upper=N> y[n];
-  }
-
-  parameters {
-    real beta0;
-    real beta1;
-    vector[n] r;
-    real s_r;
-  }
-
-  model {
-    for(i in 1:n) {
-      y[i] ~ binomial(N, inv_logit(beta0 + beta1 * x[i] + r[i]));
-      r[i] ~ normal(0, s_r);
-    }
-  }
-'
-
 d.list <- list(
     N=8,
     n=100,
     x=d$x,
     y=d$y
-  )
+)
 
-d.fit <- stan(model_code=stan_code, data=d.list, iter=1000, chains=4)
+d.fit <- stan(
+    file='model/glmm.stan',
+    data=d.list,
+    iter=1000,
+    chains=4
+)
 print(d.fit, digit=2)
 # mean se_mean   sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
 # beta0    -4.20    0.06 0.98   -6.23   -4.83   -4.15   -3.55   -2.36   308 1.00

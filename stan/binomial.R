@@ -1,16 +1,20 @@
 require(rstan)
 
+frame_files <- lapply(sys.frames(), function(x) x$ofile)
+frame_files <- Filter(Negate(is.null), frame_files)
+setwd(dirname(frame_files[[length(frame_files)]]))
+
 d <- data.frame(
-        N=10,
-        x=c(1,2,3,4,5,6,7,8,9,10),
-        y=c(0,0,1,2,4,7,8,7,8,9)
-     )
+    N=10,
+    x=c(1,2,3,4,5,6,7,8,9,10),
+    y=c(0,0,1,2,4,7,8,7,8,9)
+)
 
 d.glm <- glm(
     cbind(y, N-y) ~ x,
     family=binomial(link="logit"),
     data=d
-  )
+)
 
 summary(d.glm)
 # Coefficients:
@@ -31,31 +35,18 @@ exp(d.glm$coefficients)
 # (Intercept)           x
 #  0.01868493  1.95680129
 
-stan_code <- '
-  data {
-    int<lower=1> N;
-    int<lower=1> x[N];
-    int<lower=0, upper=N> y[N];
-  }
-
-  parameters {
-    real beta0;
-    real beta1;
-  }
-
-  model {
-    for(i in 1:N)
-      y[i] ~ binomial(N, inv_logit(beta0 + beta1 * x[i]));
-  }
-'
-
 d.list <- list(
-            N=10,
-            x=d$x,
-            y=d$y
-          )
+    N=10,
+    x=d$x,
+    y=d$y
+)
 
-d.fit <- stan(model_code=stan_code, data=d.list, iter=1000, chains=4)
+d.fit <- stan(
+    file='model/binomial.stan',
+    data=d.list,
+    iter=1000,
+    chains=4
+)
 print(d.fit, digit=2)
 # Inference for Stan model: stan_code.
 # 4 chains, each with iter=1000; warmup=500; thin=1;

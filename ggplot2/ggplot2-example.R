@@ -12,7 +12,7 @@ p <- ggplot(
   aes(
       x = Sepal.Length,
       y = Sepal.Width,
-      colour=Species
+      colour = Species
   )
 )
 
