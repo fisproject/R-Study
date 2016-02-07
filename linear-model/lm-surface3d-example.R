@@ -1,4 +1,3 @@
-# install.packages("rgl")
 require(rgl)
 
 # airquality : Daily air quality measurements in New York. May to September 1973.
