@@ -1,4 +1,5 @@
 require(ggplot2)
+require(reshape2)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
@@ -47,7 +48,17 @@ ggsave("img/iris-tile-qplot.png", g)
 
 # Heat map
 g <- base1 + stat_density2d(aes(fill=..level..), geom="polygon") +
-    scale_fill_continuous(low = "green", high = "red") +
+    scale_fill_continuous(low = "cyan", high = "magenta") +
     geom_point(color = "black")
 plot(g)
 ggsave("img/iris-heatmap.png", g)
+
+# Contours of 3d data
+volcano3d <- melt(volcano)
+names(volcano3d) <- c("x", "y", "z")
+base4 <- ggplot(volcano3d, aes(x = x, y = y, z = z))
+
+g <- base4 + stat_contour(aes(fill=..level..), geom="polygon") +
+    scale_fill_continuous(low = "gray", high = "black")
+plot(g)
+ggsave("img/volcano-contours.png", g)
