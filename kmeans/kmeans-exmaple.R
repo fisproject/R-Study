@@ -15,10 +15,10 @@ colnames(wine) <- c("class","Alcohol","Malic Acid","Ash","Alcalinity of Ash","Ma
 wine.class <- as.factor(wine[,c(1)])
 wine.index <- c(1:nrow(wine))
 wine <- scale(wine)
-wine.nonlabeled <- wine[,c(-1)]
+wine.unlabeled <- wine[,c(-1)]
 
 # K-means
-wine.km <- kmeans(wine.nonlabeled, centers=3)
+wine.km <- kmeans(wine.unlabeled, centers=3)
 summary(as.factor(wine.km$cluster))
 table(wine.class, wine.km$cluster)
 # wine.class  1  2  3
@@ -27,7 +27,7 @@ table(wine.class, wine.km$cluster)
 #          3  0 48  0
 
 # PCA
-pca <- prcomp(wine.nonlabeled, scale=TRUE)
+pca <- prcomp(wine.unlabeled, scale=TRUE)
 pc1 <- pca$x[,1]
 pc2 <- pca$x[,2]
 
@@ -84,7 +84,7 @@ p <- g + geom_point(aes(colour=cluster), size=4) +
 plot(p)
 
 # Hartigan's Method
-wine.fit <- FitKMeans(wine.nonlabeled, max.clusters=20, nstart=25, seed=12345)
+wine.fit <- FitKMeans(wine.unlabeled, max.clusters=20, nstart=25, seed=12345)
 # Clusters  Hartigan AddCluster
 # 1         2 69.523332       TRUE
 # 2         3 52.151051       TRUE
