@@ -2,7 +2,8 @@ require(MASS)
 require(ggplot2)
 
 data(mtcars)
-d <- as.data.frame(subset(mtcars, select=c(mpg, am, vs)))
+
+d <- as.data.frame(subset(mtcars, select = c(mpg, am, vs)))
 # > head(d)
 #                    mpg am vs
 # Mazda RX4         21.0  1  0
@@ -12,10 +13,7 @@ d <- as.data.frame(subset(mtcars, select=c(mpg, am, vs)))
 # Hornet Sportabout 18.7  0  0
 # Valiant           18.1  0  1
 
-model <- glm(vs ~ mpg,
-             family=binomial(link=logit),
-             data=d
-         )
+model <- glm(vs ~ mpg, family = binomial(link = logit), data = d)
 
 summary(model)
 # Deviance Residuals:
@@ -37,10 +35,11 @@ summary(model)
 #
 # Number of Fisher Scoring iterations: 6
 
-unknown = data.frame(mpg=c(24.0, 13.2, 18.2, 19.9))
-pred <- predict(model, unknown, type="response")
+unknown = data.frame(mpg = c(24.0, 13.2, 18.2, 19.9))
+pred <- predict(model, unknown, type = "response")
 probs <- data.frame(unknown, data.frame(pred))
 
-g <- ggplot(d, aes(x=mpg, y=vs))
-g +  geom_point() + stat_smooth(method="glm", family="binomial", se=FALSE) +
- layer(data=probs, mapping=aes(x=mpg, y=prob), geom="point", position="identity", colour="red")
+g <- ggplot(d, aes(x = mpg, y = vs))
+g +  geom_point() + stat_smooth(method = "glm", family = "binomial", se = FALSE) +
+ layer(data = probs, mapping = aes(x = mpg, y = prob),
+ geom = "point", position = "identity", colour = "red")
