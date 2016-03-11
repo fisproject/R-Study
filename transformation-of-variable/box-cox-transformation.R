@@ -21,12 +21,20 @@ summary(est)
 # 1/2 : square root, 0 : log, -1 : inverse
 lambda <- est$roundlam
 
+# histogram
 p1 <- ggplot(Wool, aes(x = cycles), y = ..density..) + labs(title = "before")
 p2 <- ggplot(Wool, aes(x = bcPower(cycles, lambda)), y = ..density..) +
     labs(title = "box-cox-transformation")
 
 p <- new('ggmultiplot', plots=list(p1, p2), ncol=2)
 p[1:2] <- p[1:2] + geom_histogram(alpha = 0.8, position = "identity", size = 1)
+p
+
+# qqplot
+p1 <- qplot(sample = cycles, data = Wool) + labs(title = "before")
+p2 <- qplot(sample = bcPower(cycles, lambda), data = Wool) +
+  labs(title = "box-cox-transformation")
+p <-  new('ggmultiplot', plots=list(p1, p2), ncol=2)
 p
 
 model.lm <- lm(cycles ~ len + amp + load, Wool)
