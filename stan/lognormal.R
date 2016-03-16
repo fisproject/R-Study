@@ -13,10 +13,10 @@ d.list <- list(
 )
 
 d.fit <- stan(
-    file='model/lognormal.stan',
-    data=d.list,
-    iter=2000,
-    chains=2
+    file = 'model/lognormal.stan',
+    data = d.list,
+    iter = 2000,
+    chains = 2
 )
 
 print(d.fit, digits=2)
@@ -42,17 +42,11 @@ ex.zeta <-mean(ex$zeta)
 ex.lower <-mean(ex$lower)
 ex.upper <-mean(ex$upper)
 
-p <- ggplot(
-  d,
-  aes(
-      x=index,
-      y=income,
-  )
-)
+p <- ggplot(d, aes(x = index, y = income))
 
 p <- p + geom_line(size=0.5) +
-    geom_hline(yintercept=as.integer(ex.zeta), colour="red", linetype="longdash") +
-    geom_hline(yintercept=as.integer(ex.lower), colour="red", linetype="longdash", alpha=0.5) +
-    geom_hline(yintercept=as.integer(ex.upper), colour="red", linetype="longdash", alpha=0.5) +
-    labs(title="", x="Index", y="Income")
+    geom_hline(yintercept = as.integer(ex.zeta), colour = "red", linetype = "longdash") +
+    geom_hline(yintercept = as.integer(ex.lower), colour = "red", linetype = "longdash", alpha = 0.5) +
+    geom_hline(yintercept = as.integer(ex.upper), colour = "red", linetype = "longdash", alpha = 0.5) +
+    labs(title = "", x = "Index", y = "Income")
 plot(p)

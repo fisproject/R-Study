@@ -11,7 +11,7 @@ head(d)
 # 5  -0.1     1  5
 # 6   3.4     1  6
 
-p <- ggplot(d, aes(x=ID ,y=extra, group=group, colour=group))
+p <- ggplot(d, aes(x = ID, y = extra, group = group, colour = group))
 
 p <- p + geom_line() +
     geom_point() +

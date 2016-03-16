@@ -18,9 +18,9 @@ d <- as.data.frame(read.csv(file="data/seeds.csv"))
 
 d.glmm <- glmmML(
     cbind(y, N-y) ~ x,
-    family=binomial,
-    cluster=id,
-    data=d
+    family = binomial,
+    cluster = id,
+    data = d
 )
 
 summary(d.glmm)
@@ -36,17 +36,17 @@ summary(d.glmm)
 # Residual deviance: 269.4 on 97 degrees of freedom 	AIC: 275.4
 
 d.list <- list(
-    N=8,
-    n=100,
-    x=d$x,
-    y=d$y
+    N = 8,
+    n = 100,
+    x = d$x,
+    y = d$y
 )
 
 d.fit <- stan(
-    file='model/glmm.stan',
-    data=d.list,
-    iter=1000,
-    chains=4
+    file = 'model/glmm.stan',
+    data = d.list,
+    iter = 1000,
+    chains = 4
 )
 print(d.fit, digit=2)
 # mean se_mean   sd    2.5%     25%     50%     75%   97.5% n_eff Rhat

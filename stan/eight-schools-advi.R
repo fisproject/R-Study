@@ -19,19 +19,19 @@ setwd(dirname(frame_files[[length(frame_files)]]))
 # se : The standard error of the coaching effect of each school.
 
 schools_data <- list(
-    J=8,
-    y=c(28,8,-3,7,-1,1,18,12),
-    sigma=c(15,10,16,11,9,11,10,18)
+    J = 8,
+    y = c(28,8,-3,7,-1,1,18,12),
+    sigma = c(15,10,16,11,9,11,10,18)
 )
 
 stan_model <- stan_model(file='model/eight-schools.stan')
 
 model.fit <- vb(
     stan_model,
-    data=schools_data,
-    output_samples=2000, # (iter - warmup) / thin * chains
-    seed=123456,
-    algorithm="meanfield"
+    data = schools_data,
+    output_samples = 2000, # (iter - warmup) / thin * chains
+    seed = 123456,
+    algorithm = "meanfield"
 )
 
 print(model.fit, digits=1)
@@ -68,8 +68,9 @@ df <- rbind(data.frame(me), data.frame(pt))
 rownames(df) <- c("mean", "lower", "upper")
 dft <- data.frame(t(df)) # transposed
 
-p <- ggplot(dft, aes(x=rownames(dft), y=mean))
+p <- ggplot(dft, aes(x = rownames(dft), y = mean))
 p <- p + geom_point() +
-    geom_errorbar(aes(ymin=lower, ymax=upper)) +
-    labs(title="parameters of eight-schools (ADVI, seed=123456)", x="param", y="value")
+    geom_errorbar(aes(ymin = lower, ymax = upper)) +
+    labs(title="parameters of eight-schools (ADVI, seed=123456)",
+        x = "param", y = "value")
 plot(p)

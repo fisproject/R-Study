@@ -25,8 +25,8 @@ summary(d.lm)
 
 d.glm <- glm(
     y ~ x,
-    family=gaussian(link="identity"),
-    data=d
+    family = gaussian(link="identity"),
+    data = d
 )
 
 summary(d.glm)
@@ -44,16 +44,16 @@ summary(d.glm)
 # AIC: 29.608
 
 d.list <- list(
-    N=10,
-    x=d$x,
-    y=d$y
+    N = 10,
+    x = d$x,
+    y = d$y
 )
 
 d.fit <- stan(
-    file='model/normal.stan',
-    data=d.list,
-    iter=1000,
-    chains=4
+    file = 'model/normal.stan',
+    data = d.list,
+    iter = 1000,
+    chains = 4
 )
 print(d.fit, digit=2)
 # Inference for Stan model: stan_code.
