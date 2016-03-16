@@ -8,19 +8,19 @@ frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
 # convert char-code "nkf -w --overwrite filename"
-d <- read.csv("data/7201.T.csv", header=T)
+d <- read.csv("data/7201.T.csv", header = T)
 
 # 2 years
 raw <- 245*2
 # convert header "Date","Open","High","Low","Close","Volume"
 data <- data.frame(
-          Date=d$日付[1:raw],
-          Open=d$始値[1:raw],
-          High=d$高値[1:raw],
-          Low=d$安値[1:raw],
-          Close=d$終値[1:raw],
-          Volume=d$出来高[1:raw],
-          Adjusted=d$調整後終値[1:raw]
+          Date = d$日付[1:raw],
+          Open = d$始値[1:raw],
+          High = d$高値[1:raw],
+          Low = d$安値[1:raw],
+          Close = d$終値[1:raw],
+          Volume = d$出来高[1:raw],
+          Adjusted = d$調整後終値[1:raw]
         )
 
 # head(data)
@@ -32,7 +32,7 @@ data <- data.frame(
 # 5 2015/5/28 1298.5 1312.0 1293.0 1299.0 14069200   1299.0
 # 6 2015/5/27 1270.0 1291.0 1262.0 1280.5 12494400   1280.5
 
-ohlc <- read.zoo(data, header=T)
+ohlc <- read.zoo(data, header = T)
 
-par(family="HiraKakuProN-W3")
-candleChart(ohlc, name="日産", multi.col=TRUE, theme="white")
+par(family = "HiraKakuProN-W3")
+candleChart(ohlc, name = "日産", multi.col = TRUE, theme = "white")

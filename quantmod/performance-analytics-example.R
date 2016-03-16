@@ -9,19 +9,19 @@ frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
 # char-code convert "nkf -w --overwrite filename"
-d <- read.csv("data/7201.T.csv", header=T)
+d <- read.csv("data/7201.T.csv", header = T)
 
 # 2 years
 raw <- 245*2
 # header convert "Date","Open","High","Low","Close","Volume"
 data <- data.frame(
-          Date=d$日付[1:raw],
-          Open=d$始値[1:raw],
-          High=d$高値[1:raw],
-          Low=d$安値[1:raw],
-          Close=d$終値[1:raw],
-          Volume=d$出来高[1:raw],
-          Adjusted=d$調整後終値[1:raw]
+          Date = d$日付[1:raw],
+          Open = d$始値[1:raw],
+          High = d$高値[1:raw],
+          Low = d$安値[1:raw],
+          Close = d$終値[1:raw],
+          Volume = d$出来高[1:raw],
+          Adjusted = d$調整後終値[1:raw]
         )
 
 # head(data)
@@ -34,7 +34,7 @@ data <- data.frame(
 # 6 2015/5/27 1270.0 1291.0 1262.0 1280.5 12494400   1280.5
 
 # convert xts object
-data.xts <- xts(data[,-1], order.by=as.POSIXct(data$Date))
+data.xts <- xts(data[,-1], order.by = as.POSIXct(data$Date))
 
 # Indicator : Relative Strength Index
 rsi <- RSI(data.xts[,1])
@@ -55,6 +55,6 @@ eq <- cumprod(1+ret)
 plot(eq)
 
 # Eval (backtest)
-table.Drawdowns(ret, top=10)
+table.Drawdowns(ret, top = 10)
 table.DownsideRisk(ret)
 charts.PerformanceSummary(ret)
