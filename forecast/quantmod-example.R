@@ -1,5 +1,4 @@
 # https://github.com/joshuaulrich/quantmod
-# install.packages("quantmod")
 require(quantmod)
 
 # change working directory

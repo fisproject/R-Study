@@ -11,5 +11,4 @@ plt <- ggpairs(
   mapping = aes(color = Species), # color needs Factor
   lower = list(continuous = "smooth", combo = "facetdensity")
 )
-
 plt

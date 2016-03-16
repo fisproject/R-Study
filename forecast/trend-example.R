@@ -1,4 +1,3 @@
-# install.packages("forecast")
 require(forecast)
 require(quantmod)
 

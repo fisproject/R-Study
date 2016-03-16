@@ -7,7 +7,7 @@ setwd(dirname(frame_files[[length(frame_files)]]))
 
 h <- h2o.init(ip="localhost", port=54321, startH2O=TRUE, nthreads=-1)
 
-iris = h2o.importFile(h, path="iris.csv", key="iris.hex")
+iris = h2o.importFile(h, path="data/iris.csv", key="iris.hex")
 len <- nrow(iris)/2 # len is 75
 
 head(iris)

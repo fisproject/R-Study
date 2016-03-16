@@ -1,4 +1,3 @@
-# install.packages("recommenderlab")
 require(recommenderlab)
 
 data(Jester5k)

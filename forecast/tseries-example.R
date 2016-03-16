@@ -1,4 +1,3 @@
-# install.packages("tseries")
 require(tseries)
 
 # change working directory
