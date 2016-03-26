@@ -1,0 +1,33 @@
+{
+    "attractions": [{
+		"name": "カリブの海賊",
+		"area": "アドベンチャーランド",
+		"time_required": 15,
+		"capacity": 20,
+		"detail_url": "http://www.tokyodisneyresort.jp/sp/attraction/detail/str_id:al_carib/"
+	}, {
+		"name": "ジャングルクルーズ：ワイルドライフ・エクスペディション",
+		"area": "アドベンチャーランド",
+		"time_required": 10,
+		"capacity": 32,
+		"detail_url": "http://www.tokyodisneyresort.jp/sp/attraction/detail/str_id:al_jungle/"
+	}, {
+		"name": "ビッグサンダー・マウンテン",
+		"area": "ウエスタンランド",
+		"time_required": 4,
+		"capacity": 30,
+		"detail_url": "http://www.tokyodisneyresort.jp/sp/attraction/detail/str_id:wl_mountain/"
+    }, {
+		"name": "スプラッシュ・マウンテン",
+		"area": "クリッターカントリー",
+		"time_required": 10,
+		"capacity": 8,
+		"detail_url": "http://www.tokyodisneyresort.jp/sp/attraction/detail/str_id:cc_splash/"
+    }, {
+		"name": "スター・ツアーズ：ザ・アドベンチャーズ・コンティニュー",
+		"area": "トゥモローランド",
+		"time_required": 4.5,
+		"capacity": 40,
+		"detail_url": "http://www.tokyodisneyresort.jp/sp/attraction/detail/str_id:tl_tours/"
+	}]
+}
