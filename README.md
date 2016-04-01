@@ -8,7 +8,7 @@ R Examples
 - **cca** : canonical-correlation-analysis using {kernlab}
 - **causality** : using {Matching}, {vars}, {fastICA}
 - **correlation** : using {psych}, {polycor}, {Kendall}, {vcdExtra}, {lsr}
-- **data-handling** : using {dplyr}, {dummies}, {jqr}, {jsonlite}
+- **data-handling** : using {dplyr}, {tidyr}, {purrr}, {dummies}, {jqr}, {jsonlite}
 - **deep-learning** : using {h20}
 - **forecast** : econometric method using {tseries}, {forecast}, {quantmod}, {PerformanceAnalytics}
 - **garch** : GARCH and VaR using {rugarch}
