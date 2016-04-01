@@ -17,7 +17,7 @@ d$last_game <- as.Date(d$last_game)
 #  $ team_rank: Ord.factor w/ 3 levels "1"<"3"<"4": 3 3 2 3 3 2 2 1
 
 # column name
-d2 <- dummy.data.frame(d, sep=".", names=c("team"))
+d2 <- dummy.data.frame(d, sep = ".", names = c("team"))
 
 # type
-d3 <- dummy.data.frame(d, sep=".", dummy.classes=c("ordered"))
+d3 <- dummy.data.frame(d, sep = ".", dummy.classes = c("ordered"))

@@ -7,7 +7,7 @@ d <- read.csv("data/baseball.csv")
 
 countByTeam <- function(x, date) {
   if (!is.null(date)) {
-    x <- x[x$last_game==date,]
+    x <- x[x$last_game == date,]
     d <- c(NULL)
   }
 
@@ -15,14 +15,14 @@ countByTeam <- function(x, date) {
   t <- unique(x$team)
 
   for (i in 1:length(t)) {
-    c[i] <- nrow(x[x$team==t[i],])
+    c[i] <- nrow(x[x$team == t[i],])
     if (!is.null(date)) d[i] <- date
   }
 
   if (!is.null(date)) {
-    df <- data.frame(team=t, count=c, last_game=d)
+    df <- data.frame(team = t, count = c, last_game = d)
   }else{
-    df <- data.frame(team=t, count=c)
+    df <- data.frame(team = t, count = c)
   }
 
   return(df)
@@ -49,7 +49,7 @@ for (i in 1:length(last)){
 # 広島東洋カープ,1,2015/6/25
 # 福岡ソフトバンクホークス,1,2015/7/2
 
-d.sorted <- d[order(as.Date(d$birthday, format="%Y/%m/%d")),]
+d.sorted <- d[order(as.Date(d$birthday, format = "%Y/%m/%d")),]
 #   name                     team   birthday
 # 5 黒田　博樹           広島東洋カープ  1975/2/10
 # 7 荻野　貴司     千葉ロッテマリーンズ 1985/10/21
