@@ -6,6 +6,7 @@ frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
 d <- read.csv("data/baseball.csv")
+
 d$team_rank <- as.ordered(d$team_rank)
 d$birthday <- as.Date(d$birthday)
 d$last_game <- as.Date(d$last_game)
