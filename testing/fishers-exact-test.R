@@ -1,9 +1,12 @@
 d <- matrix(
   c(2, 10, 15, 3),
-  nrow=2,
-  dimnames=list(c("male", "female"), c("bicycle", "walk"))
+  nrow = 2,
+  dimnames = list("gender" = c("male", "female"),
+                  "transportation" = c("bicycle", "walk"))
 )
-#         bicycle walk
+
+#          transportation
+# gender   bicycle walk
 # male         2   15
 # female      10    3
 

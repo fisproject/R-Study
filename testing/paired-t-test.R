@@ -13,16 +13,14 @@ head(d)
 
 p <- ggplot(d, aes(x = ID, y = extra, group = group, colour = group))
 
-p <- p + geom_line() +
-    geom_point() +
-    labs(title="sleep", x="ID", y="extra") +
-    scale_colour_hue()
+p <- p + geom_line() + geom_point() +
+    labs(title = "sleep", x = "ID", y = "extra") + scale_colour_hue()
 plot(p)
 
 grp1 <- d %>% filter(group == 1)
 grp2 <- d %>% filter(group == 2)
 
-t.test(grp1$extra, grp2$extra, paired=T)
+t.test(grp1$extra, grp2$extra, paired = T)
 # Paired t-test
 #
 # data:  grp1$extra and grp2$extra
