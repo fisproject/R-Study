@@ -12,7 +12,7 @@ R Examples
 - **deep-learning** : using {h20}
 - **forecast** : econometric method using {tseries}, {forecast}, {quantmod}, {PerformanceAnalytics}
 - **garch** : GARCH and VaR using {rugarch}
-- **glm** : simple generalized-linear-model using {stats}
+- **glm** : simple generalized-linear-model using {stats}, {MASS}
 - **ggplot2** : using {ggplot2}, {GGally}, {ggfortify}
 - **gradient-boosting** : gradient boosting using {xgboost}
 - **kmeans** : k-means clustering using {stats}

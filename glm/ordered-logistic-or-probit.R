@@ -8,6 +8,8 @@ class(housing$Sat)
 house.logit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
 summary(house.logit, digits = 3)
 
+confint(house.logit)
+
 predict(house.logit, housing, type = "p")
 
 texreg::screenreg(house.logit)
@@ -15,6 +17,8 @@ texreg::screenreg(house.logit)
 # ordered probit model
 house.probit <- polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing, method = "probit")
 summary(house.probit, digits = 3)
+
+confint(house.probit)
 
 predict(house.probit, housing, type = "p")
 

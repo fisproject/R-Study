@@ -10,7 +10,8 @@ head(lalonde)
 # 5  33    8     1    0       0      1    0    0   289.79   1   1     1
 # 6  22    9     1    0       0      1    0    0  4056.49   1   1     1
 
-model.glm <- glm(treat ~., data=lalonde[,-9], family=binomial)
+# propensity score
+model.glm <- glm(treat ~., data=lalonde[,-9], family = binomial)
 summary(model.glm)
 # Deviance Residuals:
 #     Min       1Q   Median       3Q      Max
@@ -62,9 +63,9 @@ summary(model.lm)
 # F-statistic: 4.407 on 2 and 442 DF,  p-value: 0.01273
 
 mout <- Match(
-    Y=lalonde$re78,
-    Tr=lalonde$treat,
-    X=model.glm$fitted,
+    Y = lalonde$re78,
+    Tr = lalonde$treat,
+    X = model.glm$fitted
   )
 
 summary(mout)
@@ -78,12 +79,18 @@ summary(mout)
 # Matched number of observations...............  185
 # Matched number of observations  (unweighted).  322
 
+# check pair
+lalonde$propensity_score <- model.glm$fitted
+treated_group <- lalonde[mout$index.treated,]
+control_group <- lalonde[mout$index.control,]
+pair <- cbind(treated_group, control_group)
+
 mout <- Match(
-    Y=lalonde$re78,
-    Tr=lalonde$treat,
-    X=model.glm$fitted,
-    estimand="ATT",
-    caliper=T
+    Y = lalonde$re78,
+    Tr = lalonde$treat,
+    X = model.glm$fitted,
+    estimand = "ATT",
+    caliper = T
   )
 
 summary(mout)
@@ -103,9 +110,9 @@ summary(mout)
 
 MatchBalance(
     treat ~ .,
-    match.out=mout,
-    nboots=1000,
-    data=lalonde[,-9]
+    match.out = mout,
+    nboots = 1000,
+    data = lalonde[,-9]
   )
 # Before Matching Minimum p.value: 0.0020368
 # Variable Name(s): nodegr  Number(s): 6
