@@ -6,14 +6,14 @@ frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
 d <- data.frame(
-    x=c(1,2,3,4,5,6,7,8,9,10),
-    y=c(44,32,26,20,14,9,7,4,2,1)
+    x = c(1,2,3,4,5,6,7,8,9,10),
+    y = c(44,32,26,20,14,9,7,4,2,1)
 )
 
 d.glm <- glm(
     y ~ x,
-    family=poisson(link="log"),
-    data=d
+    family = poisson(link="log"),
+    data = d
 )
 
 summary(d.glm)
@@ -31,18 +31,18 @@ summary(d.glm)
 # AIC: 47.803
 
 d.list <- list(
-    N=10,
-    x=d$x,
-    y=d$y
+    N = 10,
+    x = d$x,
+    y = d$y
 )
 
 d.fit <- stan(
-    file='model/poisson.stan',
-    data=d.list,
-    iter=1000,
-    chains=4
+    file = 'model/poisson.stan',
+    data = d.list,
+    iter = 1000,
+    chains = 4
 )
-print(d.fit, digit=2)
+print(d.fit, digit = 2)
 # Inference for Stan model: stan_code.
 # 4 chains, each with iter=1000; warmup=500; thin=1;
 # post-warmup draws per chain=500, total post-warmup draws=2000.
