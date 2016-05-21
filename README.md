@@ -10,9 +10,10 @@ R Examples
 - **correlation** : using {psych}, {polycor}, {Kendall}, {vcdExtra}, {lsr}
 - **data-handling** : using {dplyr}, {tidyr}, {purrr}, {dummies}
 - **deep-learning** : using {h20}
+- **discrete-choice-model** : using {mlogit}, {MASS}
 - **forecast** : econometric method using {tseries}, {forecast}, {quantmod}, {PerformanceAnalytics}
 - **garch** : GARCH and VaR using {rugarch}
-- **glm** : simple generalized-linear-model using {stats}, {MASS}
+- **glm** : simple generalized-linear-model using {stats}
 - **ggplot2** : using {ggplot2}, {GGally}, {ggfortify}
 - **gradient-boosting** : gradient boosting using {xgboost}
 - **kmeans** : k-means clustering using {stats}

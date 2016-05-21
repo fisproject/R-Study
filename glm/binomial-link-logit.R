@@ -40,6 +40,5 @@ pred <- predict(model, unknown, type = "response")
 probs <- data.frame(unknown, data.frame(pred))
 
 g <- ggplot(d, aes(x = mpg, y = vs))
-g +  geom_point() + stat_smooth(method = "glm", family = "binomial", se = FALSE) +
- layer(data = probs, mapping = aes(x = mpg, y = prob),
- geom = "point", position = "identity", colour = "red")
+g +  geom_point() +
+    stat_smooth(method = "glm", method.args = list(family="binomial"), se = FALSE)
