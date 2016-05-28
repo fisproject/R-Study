@@ -1,10 +1,11 @@
 require(MASS)
+require(ROCR)
 require(ggplot2)
 
 data(mtcars)
 
 d <- as.data.frame(subset(mtcars, select = c(mpg, am, vs)))
-# > head(d)
+# head(d)
 #                    mpg am vs
 # Mazda RX4         21.0  1  0
 # Mazda RX4 Wag     21.0  1  0
@@ -13,6 +14,7 @@ d <- as.data.frame(subset(mtcars, select = c(mpg, am, vs)))
 # Hornet Sportabout 18.7  0  0
 # Valiant           18.1  0  1
 
+# Logistic Regression
 model <- glm(vs ~ mpg, family = binomial(link = logit), data = d)
 
 summary(model)
@@ -35,10 +37,30 @@ summary(model)
 #
 # Number of Fisher Scoring iterations: 6
 
-unknown = data.frame(mpg = c(24.0, 13.2, 18.2, 19.9))
-pred <- predict(model, unknown, type = "response")
-probs <- data.frame(unknown, data.frame(pred))
-
 g <- ggplot(d, aes(x = mpg, y = vs))
 g +  geom_point() +
-    stat_smooth(method = "glm", method.args = list(family="binomial"), se = FALSE)
+    stat_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE)
+
+# ROC
+df <- data.frame(pred = unname(predict(model, type = "response")), obs = d$vs)
+pred <- prediction(df$pred, df$obs)
+
+# AUC
+performance(pred, "auc")@y.values
+# [[1]]
+# [1] 0.9107143
+
+# True positive rate - False positive rate
+perf1 <- performance(pred, "tpr", "fpr")
+plot(perf1)
+abline(a = 0, b = 1, col = "red")
+
+# Sensitivity - Specificity
+perf2 <- performance(pred, "sens", "spec")
+plot(perf2)
+abline(a = 1, b = -1, col = "red")
+
+# Predict unknown data
+unknown = data.frame(mpg = c(24.0, 13.2, 18.2, 19.9))
+unknown.pred <- predict(model, unknown, type = "response")
+unknown.probs <- data.frame(unknown, data.frame(unknown.pred))

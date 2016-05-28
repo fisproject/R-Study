@@ -13,7 +13,7 @@ R Examples
 - **discrete-choice-model** : using {mlogit}, {MASS}
 - **forecast** : econometric method using {tseries}, {forecast}, {quantmod}, {PerformanceAnalytics}
 - **garch** : GARCH and VaR using {rugarch}
-- **glm** : simple generalized-linear-model using {stats}
+- **glm** : simple generalized-linear-model using {stats}, {ROCR}
 - **ggplot2** : using {ggplot2}, {GGally}, {ggfortify}
 - **gradient-boosting** : gradient boosting using {xgboost}
 - **kmeans** : k-means clustering using {stats}
@@ -29,7 +29,7 @@ R Examples
 - **stan** : MCMC (NUTS) and ADVI using {rstan}
 - **stats** : basic-statistics
 - **svm** : support-vector-machine using {kernlab}, {caret}
-- **testing** : some statistical hypothesis testing using {lawstat}
+- **testing** : some statistical hypothesis testing using {lawstat}, {pwr}
 - **transformation-of-variable** : Box-Cox transformation using {car}
 
 ## Licence
