@@ -10,6 +10,7 @@ R Examples
 - **correlation** : using {psych}, {polycor}, {Kendall}, {vcdExtra}, {lsr}
 - **data-handling** : using {dplyr}, {tidyr}, {purrr}, {dummies}
 - **deep-learning** : using {h20}
+- **design-of-experiments** : using {DoE.base}
 - **discrete-choice-model** : using {mlogit}, {MASS}
 - **forecast** : econometric method using {tseries}, {forecast}, {quantmod}, {PerformanceAnalytics}
 - **garch** : GARCH and VaR using {rugarch}
