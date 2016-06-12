@@ -22,11 +22,7 @@ pcor(air)
 # Month   -0.1923602 -0.17190775 -0.07467615  0.43771581  1.00000000  0.04833785
 # Day      0.1155939 -0.04728812  0.05413314 -0.12748877  0.04833785  1.00000000
 
-air.lm <- lm(
-	Ozone ~ Solar.R + Wind + Temp,
-	data=air
-)
-
+air.lm <- lm(Ozone ~ Solar.R + Wind + Temp, data = air)
 summary(air.lm)
 # Coefficients:
 #              Estimate Std. Error t value Pr(>|t|)
@@ -61,3 +57,7 @@ step(air.lm)
 # Coefficients:
 # (Intercept)      Solar.R         Wind         Temp
 #   -64.34208      0.05982     -3.33359      1.65209
+
+# diagnostic plots
+par(mfrow = c(2,2))
+plot(air.lm)
