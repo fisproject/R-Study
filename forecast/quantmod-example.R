@@ -10,17 +10,17 @@ setwd(dirname(frame_files[[length(frame_files)]]))
 d <- read.csv("data/7201.T.csv", header = T)
 
 # 2 years
-raw <- 245*2
+rows <- 245*2
 # convert header "Date","Open","High","Low","Close","Volume"
 data <- data.frame(
-          Date = d$日付[1:raw],
-          Open = d$始値[1:raw],
-          High = d$高値[1:raw],
-          Low = d$安値[1:raw],
-          Close = d$終値[1:raw],
-          Volume = d$出来高[1:raw],
-          Adjusted = d$調整後終値[1:raw]
-        )
+    Date = d$日付[1:rows],
+    Open = d$始値[1:rows],
+    High = d$高値[1:rows],
+    Low = d$安値[1:rows],
+    Close = d$終値[1:rows],
+    Volume = d$出来高[1:rows],
+    Adjusted = d$調整後終値[1:rows]
+)
 
 # head(data)
 #       Date   Open   High    Low  Close   Volume  Adjusted

@@ -6,37 +6,38 @@ frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
 # convert char-code "nkf -w --overwrite filename"
-d <- read.csv("data/7201.T.csv", header=T)
+d <- read.csv("data/7201.T.csv", header = T)
 
 # 5 years
-raw <- 245*5
+rows <- 245 * 5
 # convert header "Date","Open","High","Low","Close","Volume"
 data <- data.frame(
-          Date=d$日付[1:raw],
-          Open=d$始値[1:raw],
-          High=d$高値[1:raw],
-          Low=d$安値[1:raw],
-          Close=d$終値[1:raw],
-          Volume=d$出来高[1:raw],
-          Adjusted=d$調整後終値[1:raw]
-        )
+    Date = d$日付[1:rows],
+    Open = d$始値[1:rows],
+    High = d$高値[1:rows],
+    Low = d$安値[1:rows],
+    Close = d$終値[1:rows],
+    Volume = d$出来高[1:rows],
+    Adjusted = d$調整後終値[1:rows]
+)
 
-data.zoo <- zoo(data$Close, order.by=as.Date(data$Date, format='%Y/%m/%d'))
+data.zoo <- zoo(data$Close, order.by = as.Date(data$Date, format = '%Y/%m/%d'))
 # time series
 data.ts <- ts(data.zoo)
 
 # Plots a time series along with its acf (AutoCorrelation Function) and either its pacf (Partial ACF),
 # lagged scatterplot or spectrum.
-par(family="HiraKakuProN-W3")
-tsdisplay(data.ts, main="日産")
+par(family = "HiraKakuProN-W3")
+tsdisplay(data.ts, main = "日産")
 
-model <- auto.arima(data.ts,
-            max.p=2, # AR degree
-            max.q=2, # MA degree
-            ic="aic",# model selection.
-            trace=T, # reported option
-            stepwise=T
-         )
+model <- auto.arima(
+    data.ts,
+    max.p = 2, # AR degree
+    max.q = 2, # MA degree
+    ic = "aic",# model selection.
+    trace = T, # reported option
+    stepwise = T
+)
 # ARIMA(2,1,2) with drift         : 10281.96
 # ARIMA(0,1,0) with drift         : 10279.18
 # ARIMA(1,1,0) with drift         : 10279.32
@@ -57,8 +58,9 @@ summary(model)
 # Training set 0.02431441
 # Training set 0.09790725
 
-f <- forecast(model,
-        level=c(50, 95), # confidence interval
-        h=20*3 # after 3 months
-     )
+f <- forecast(
+    model,
+    level = c(50, 95), # confidence interval
+    h = 20*3 # after 3 months
+)
 plot(f)
