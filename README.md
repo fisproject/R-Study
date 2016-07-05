@@ -20,7 +20,8 @@ R Examples
 - **kmeans** : k-means clustering using {stats}
 - **knn** : k-nearest neighbor using {class}
 - **lda** : linear-discriminant using {MASS}
-- **lm** : simple linear-model using {stats}
+- **lm** : linear-model using {stats}
+- **lme** : linear-mixed-effects-model using {lme4}
 - **naive-bayes** : using {e1071}
 - **pca** : (kernel) principal-component-analysis using {kernlab}
 - **random-forest** : rpart, random-forest using {randomForest}
