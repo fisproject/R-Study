@@ -28,19 +28,17 @@ ranking <- iris %>% mutate(
   dense_rank = dense_rank(Sepal.Length)
 )
 
-# SQL: SELECT
-sepal.length <- iris %>% select(Sepal.Length)
 
 # SQL: WHERE
 filtered <- iris %>% filter(Sepal.Length > 6.5)
-
-# SQL: ORDER BY
-arranged <- iris %>% arrange(desc(Sepal.Length))
 
 # SQL: SELECT
 selected <- iris %>% select(Sepal.Length) %>%
   arrange(desc(Sepal.Length)) %>%
   head(10)
+
+# SQL: ORDER BY
+arranged <- iris %>% arrange(desc(Sepal.Length))
 
 # SQL: COUNT, MAX, MIN
 summarised <- iris %>% summarise(
