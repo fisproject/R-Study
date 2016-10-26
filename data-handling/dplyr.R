@@ -1,5 +1,8 @@
 require(dplyr)
 
+# Retain only unique/distinct rows
+species.uniq <- iris %>% distinct(Species, .keep_all = TRUE)
+
 # Sort
 sorted <- iris %>% arrange(Sepal.Length)
 
