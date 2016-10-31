@@ -5,6 +5,7 @@ R-Study
 R Examples
 
 - **arules** : association rules using {arules}
+- **arima** : AR, ARMA, ARIMA models using {stats}
 - **cca** : canonical-correlation-analysis using {kernlab}
 - **causality** : using {Matching}, {vars}, {fastICA}
 - **correlation** : using {psych}, {polycor}, {Kendall}, {vcdExtra}, {lsr}
