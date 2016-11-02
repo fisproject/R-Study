@@ -39,9 +39,38 @@ summary(model)
 #
 # Best model: ARIMA(0,1,0) with drift
 
-f <- forecast(
+model.forecast <- forecast(
     model,
     level = c(50, 95), # confidence interval
     h = 20 * 3 # after 3 months
 )
-plot(f)
+
+summary(model.forecast)
+# Forecast method: ARIMA(0,1,0) with drift
+#
+# Model Information:
+# Series: df.ts
+# ARIMA(0,1,0) with drift
+#
+# Coefficients:
+#        drift
+#       0.3791
+# s.e.  0.4396
+#
+# sigma^2 estimated as 256.8:  log likelihood=-5568.01
+# AIC=11140.01   AICc=11140.02   BIC=11150.4
+#
+# Error measures:
+#                        ME     RMSE     MAE        MPE     MAPE     MASE
+# Training set 0.0006137099 16.01399 12.0131 -0.0266852 1.422703 1.000106
+#                    ACF1
+# Training set 0.02340887
+#
+# Forecasts:
+#      Point Forecast    Lo 50    Hi 50    Lo 95    Hi 95
+# 1330       1319.879 1309.070 1330.689 1288.469 1351.290
+# 1331       1320.258 1304.971 1335.545 1275.837 1364.679
+# 1332       1320.637 1301.915 1339.360 1266.233 1375.042
+# 1333       1321.017 1299.398 1342.635 1258.196 1383.838
+
+plot(model.forecast)
