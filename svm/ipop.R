@@ -8,9 +8,9 @@ labelVec[labelVec==2] <- -1
 X <- cbind(1,featureMat)
 Y <- diag(labelVec)
 A <- Y %*% X
-b <- rep( 1, length=dim(X)[1] )
-r <- rep( 5000, length=dim(X)[1] )
-u <- rep( 5000, length=dim(X)[2] )
+b <- rep( 1, length = dim(X)[1] )
+r <- rep( 5000, length = dim(X)[1] )
+u <- rep( 5000, length = dim(X)[2] )
 l <- -u
 
 # 目的関数
@@ -19,7 +19,7 @@ H[1,1] <- 0
 c <- numeric(dim(X)[2])
 
 # 二次計画
-result <- ipop(c, H, A, b, l, u, r, maxiter=50)
+result <- ipop(c, H, A, b, l, u, r, maxiter = 50)
 w <- primal(result)
 
 # データのプロットと超平面

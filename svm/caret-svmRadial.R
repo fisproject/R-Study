@@ -1,28 +1,29 @@
 require(caret)
 require(kernlab)
 require(ggplot2)
+require(e1071)
 
 set.seed(1500)
 
 grid <- expand.grid(
-  C=((2:10)*0.5),
-  sigma=((1:10)*0.01)
+  C = ((2:10)*0.5),
+  sigma = ((1:10)*0.01)
 )
 
 ctrl <- trainControl(
-  method="cv",
-  savePred=T,
-  classProb=T,
-  number=3
+  method = "cv",
+  savePred = T,
+  classProb = T,
+  number = 3
 )
 
 svmFit <- train(
   Species ~ .,
-  data=iris,
-  method="svmRadial", # gaussian kernel
-  trace=T,
-  trControl=ctrl,
-  tuneGrid=grid
+  data = iris,
+  method = "svmRadial", # gaussian kernel
+  trace = T,
+  trControl = ctrl,
+  tuneGrid = grid
 )
 
 # eval
@@ -53,7 +54,7 @@ svmFit$finalModel
 head(svmFit$pred)
 
 post <- postResample(svmFit$pred$pred, svmFit$pred$obs)
-R2(svmFit$pred$pred, svmFit$pred$obs, formula="traditional", na.rm=FALSE)
+R2(svmFit$pred$pred, svmFit$pred$obs, formula = "traditional", na.rm = FALSE)
 
 # results
 res.C <- svmFit$results$C
@@ -62,26 +63,20 @@ res.acc <- svmFit$results$Accuracy
 
 res <- data.frame(svmFit$pred)
 
-p <- ggplot(
-  svmFit$results,
-  aes(
-    x=C,
-    y=sigma
-  )
-)
-p + geom_point(aes(colour=Accuracy), size=10) + scale_colour_gradient()
+p <- ggplot(svmFit$results, aes(x = C, y = sigma))
+p + geom_point(aes(colour = Accuracy), size = 10) + scale_colour_gradient(low = "#0068b7", high = "#f39800")
 
 model <- ksvm(
   Species ~ .,
-  data=iris,
-  type="C-svc",
-  kernel="rbfdot",
-  C=tune$C,
-  kpar=list(sigma=res.sigma)
+  data = iris,
+  type = "C-svc",
+  kernel = "rbfdot",
+  C = tune$C,
+  kpar=list(sigma = res.sigma)
 )
 
-iris.res <- predict(model,iris)
-table(iris.res,iris$Species)
+iris.res <- predict(model, iris)
+table(iris.res, iris$Species)
 # iris.res     setosa versicolor virginica
 #   setosa         50          0         0
 #   versicolor      0         49         5

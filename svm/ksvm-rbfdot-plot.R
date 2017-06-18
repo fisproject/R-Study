@@ -2,23 +2,23 @@ require(kernlab)
 
 set.seed(1500)
 
-y <- as.matrix(iris[51:150, 5])
-datas <- data.frame(iris[51:150,3:4], y)
+d <- data.frame(iris[51:150,3:4], y = as.character.factor(iris[51:150,5])) # versicolor and virginica
+d$y <- setattr(d$y,"levels", c("versicolor", "virginica"))
 
-ir.ksvm <- ksvm(
-  y ~ .,
-  data=datas,
-  kernel="rbfdot",
-  kpar=list(sigma=0.2), # kernel param gamma
-  C=5, # margin param C
-  cross=3
+iris.ksvm <- ksvm(
+  y ~ ., # y is Species
+  data = d,
+  kernel = "rbfdot",
+  kpar = list(sigma=0.2), # kernel param sigma
+  C = 5, # margin param C
+  cross = 3
 )
 
-print(ir.ksvm)
+print(iris.ksvm)
 
-plot(ir.ksvm,data=datas[, 1:2])
+plot(iris.ksvm, data = d[,1:2])
 
-table(datas$y,predict(ir.ksvm,datas[, 1:2]))
+table(d$y, predict(iris.ksvm, d[,1:2]))
 #             versicolor virginica
 # versicolor         47         3
 # virginica           3        47

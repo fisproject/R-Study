@@ -10,8 +10,8 @@ npos <- round(n/2) # number of positive examples
 nneg <- n-npos # number of negative examples
 
 # Generate the positive and negative examples
-xpos <- matrix(rnorm(npos*p,mean=meanpos, sd=sigma), npos, p)
-xneg <- matrix(rnorm(nneg*p,mean=meanneg, sd=sigma), npos ,p)
+xpos <- matrix(rnorm(npos*p,mean = meanpos, sd = sigma), npos, p)
+xneg <- matrix(rnorm(nneg*p,mean = meanneg, sd = sigma), npos ,p)
 x <- rbind(xpos, xneg)
 # Generate the labels
 y <- matrix(c(rep(1, npos), rep(-1, nneg)))
@@ -31,10 +31,10 @@ istrain[tindex]=1
 model <- ksvm(
   xtrain,
   ytrain,
-  type="C-svc",
-  kernel="vanilladot",
-  C=100, # margin param C
-  scaled=c()
+  type = "C-svc",
+  kernel = "vanilladot",
+  C = 100, # margin param C
+  scaled = c()
 )
 
 # Look and understand what model contains
@@ -50,4 +50,4 @@ alphaindex(model)
 b(model)
 
 # Use the built-in function to pretty-plot the classifier
-plot(model,data=xtrain)
+plot(model,data = xtrain)
