@@ -1,4 +1,3 @@
-require(MASS)
 require(ggplot2)
 
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
