@@ -11,13 +11,13 @@ genelate <- function(dims) {
   mu <- rep(0, dims)
   sigma <- diag(dims)
   mgauss <- mvrnorm(1000, mu, sigma)
-
+  df <- data.frame(mgauss)
+  
   # save as csv  
   fname <- paste(paste("./data/", dims, sep = ""), "d-gauss.csv", sep = "")
   write.csv(df, fname, row.names = FALSE)
 
   # plot
-  df <- data.frame(mgauss)
   p <- ggplot() + geom_point(data = df, aes(x = X1, y = X2)) +
     labs(title = fname, x = "X1", y = "X2")
   plot(p)
