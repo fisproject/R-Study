@@ -1,5 +1,5 @@
 R-Study
-====
+---
 
 ## Overview
 R Examples
@@ -7,7 +7,7 @@ R Examples
 - **arules**: association rules using {arules}
 - **arima**: AR, ARMA, ARIMA models using {stats}
 - **cca**: canonical-correlation-analysis using {kernlab}
-- **causality**: Causality Analysis using {Matching}, {vars}, {fastICA}
+- **causality**: Causality Analysis using {Matching}, {fastICA}
 - **correlation**: using {psych}, {polycor}, {Kendall}, {vcdExtra}, {lsr}
 - **data-handling**: using {dplyr}, {tidyr}, {purrr}, {dummies}
 - **design-of-experiments**: using {DoE.base}
@@ -33,6 +33,7 @@ R Examples
 - **svm**: Support Vector Machine using {kernlab}, {caret}
 - **testing**: Statistical Hypothesis Testing using {lawstat}, {pwr}
 - **transformation**: Box-Cox transformation using {car}
+- **var**: VAR model using {vars}
 
 ## Licence
 [MIT](http://opensource.org/licenses/MIT)
