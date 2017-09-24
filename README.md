@@ -12,7 +12,7 @@ R Examples
 - **data-handling**: using {dplyr}, {tidyr}, {purrr}, {dummies}
 - **design-of-experiments**: using {DoE.base}
 - **discrete-choice-model**: using {mlogit}, {MASS}, {ordinal}
-- dlm: Dynamic Linear Models using {dlm}
+- **dlm**: Dynamic Linear models using {dlm}
 - **forecast**: econometric method using {tseries}, {forecast}, {quantmod}, {PerformanceAnalytics}
 - **garch**: GARCH and VaR using {rugarch}
 - **glm**: simple Generalized-Linear-Model using {stats}, {ROCR}
