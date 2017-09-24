@@ -18,7 +18,7 @@ buildFunc <- function(parm) {
     order = 2, # Local Linear Trend model
     dV = exp(parm[1]), # variance of the observation noise
     dW = c(exp(parm[2]), 0)) + # diagonal elements of the variance matrix of the system noise
-  dlmModSeas(frequency = 7) # seasonal component
+  dlmModSeas(frequency = 7, dV = parm[1], dW = c(1, rep(0, 7 - 2))) # seasonal component
 }
 
 parm <- log(c(var(df$pv), 0.0001))
