@@ -79,14 +79,14 @@ g
 param.ad <- params %>% filter(grepl("^ad", Parameter))
 param.va <- params %>% filter(grepl("^va", Parameter))
 
-df.trend <- data.frame(
+df.event <- data.frame(
   date = as.Date(df$date),
   ad.med = ci(param.ad)$median[1:365],
   vacation.med = ci(param.va)$median[1:365],
   pv = df$pv
 )
 
-res.rs <- melt(df.trend, id.vars = "date")
+res.rs <- melt(df.event, id.vars = "date")
 g <- ggplot(res.rs, aes(x = date, y = value, colour = variable)) +
   geom_line() +
   labs(title = "Event", x = "Date", y = "pv")
