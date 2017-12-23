@@ -1,5 +1,5 @@
-require(dplyr)
-require(tidyr)
+library(dplyr)
+library(tidyr)
 
 data("gapminder", package = "gapminder")
 

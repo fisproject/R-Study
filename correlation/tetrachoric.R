@@ -1,4 +1,4 @@
-require(psych)
+library(psych)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

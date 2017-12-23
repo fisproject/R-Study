@@ -1,5 +1,5 @@
-require(kernlab)
-require(ggplot2)
+library(kernlab)
+library(ggplot2)
 
 d <- LifeCycleSavings
 # A data frame with 50 observations on 5 variables.

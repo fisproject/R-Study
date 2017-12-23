@@ -1,4 +1,4 @@
-require(dplyr)
+library(dplyr)
 
 set.seed(12345)
 

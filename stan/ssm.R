@@ -1,8 +1,8 @@
-require(dplyr)
-require(reshape)
-require(ggplot2)
-require(rstan)
-require(ggmcmc)
+library(dplyr)
+library(reshape)
+library(ggplot2)
+library(rstan)
+library(ggmcmc)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

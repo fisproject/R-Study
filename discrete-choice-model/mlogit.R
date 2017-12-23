@@ -1,8 +1,8 @@
-require(mlogit)
-require(ggplot2)
-require(reshape2)
-require(ggfortify)
-require(dplyr)
+library(mlogit)
+library(ggplot2)
+library(reshape2)
+library(ggfortify)
+library(dplyr)
 
 data(Fishing)
 

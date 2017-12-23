@@ -1,6 +1,6 @@
-require(glmnet)
-require(useful)
-require(ggplot2)
+library(glmnet)
+library(useful)
+library(ggplot2)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

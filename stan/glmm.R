@@ -1,5 +1,5 @@
-require(glmmML)
-require(rstan)
+library(glmmML)
+library(rstan)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

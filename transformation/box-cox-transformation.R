@@ -1,6 +1,6 @@
-require(car)
-require(ggplot2)
-require(ggfortify)
+library(car)
+library(ggplot2)
+library(ggfortify)
 
 set.seed(12345)
 

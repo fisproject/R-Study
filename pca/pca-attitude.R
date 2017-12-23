@@ -1,4 +1,4 @@
-require(ggplot2)
+library(ggplot2)
 # attitude : Attitudes Toward Supervisors
 # Y	    rating	numeric	Overall rating
 # X[1]	complaints	numeric	Handling of employee complaints

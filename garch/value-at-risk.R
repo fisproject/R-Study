@@ -1,8 +1,8 @@
-require(dplyr)
-require(ggplot2)
-require(ggfortify)
-require(data.table)
-require(xts)
+library(dplyr)
+library(ggplot2)
+library(ggfortify)
+library(data.table)
+library(xts)
 
 theme_set(theme_gray(base_family="HiraMaruProN-W4"))
 

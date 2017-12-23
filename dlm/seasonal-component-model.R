@@ -1,6 +1,6 @@
-require(dlm)
-require(ggplot2)
-require(reshape2)
+library(dlm)
+library(ggplot2)
+library(reshape2)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

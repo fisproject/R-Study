@@ -1,4 +1,4 @@
-require(ordinal)
+library(ordinal)
 
 head(MASS::housing)
 

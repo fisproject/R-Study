@@ -1,5 +1,5 @@
-require(lme4)
-require(ggplot2)
+library(lme4)
+library(ggplot2)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

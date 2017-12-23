@@ -1,4 +1,4 @@
-require(plyr)
+library(plyr)
 
 # SQL: JOIN
 first <- ddply(baseball, "id", summarise, first = min(year))

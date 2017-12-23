@@ -1,4 +1,4 @@
-require(vcdExtra)
+library(vcdExtra)
 
 # See http://www.inside-r.org/packages/cran/vcdExtra/docs/JobSat
 # contingency table of job satisfaction (1996 General Social Survey)

@@ -1,5 +1,5 @@
 # install.packages("e1071")
-require(e1071)
+library(e1071)
 
 summary(iris)
 

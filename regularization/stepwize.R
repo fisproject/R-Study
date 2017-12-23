@@ -1,4 +1,4 @@
-require(coefplot)
+library(coefplot)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

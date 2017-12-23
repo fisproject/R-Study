@@ -1,5 +1,5 @@
-require(fastICA)
-require(ggplot2)
+library(fastICA)
+library(ggplot2)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

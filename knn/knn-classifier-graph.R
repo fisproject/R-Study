@@ -1,5 +1,5 @@
-require(class)
-require(ElemStatLearn)
+library(class)
+library(ElemStatLearn)
 
 x <- mixture.example$x
 g <- mixture.example$y

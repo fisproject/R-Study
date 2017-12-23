@@ -1,4 +1,4 @@
-require(vars)
+library(vars)
 
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)

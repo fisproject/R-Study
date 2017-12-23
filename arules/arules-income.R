@@ -1,4 +1,4 @@
-require(arules)
+library(arules)
 
 data(Income)
 

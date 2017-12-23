@@ -1,4 +1,4 @@
-require(class)
+library(class)
 
 iris <- data.frame(iris)
 

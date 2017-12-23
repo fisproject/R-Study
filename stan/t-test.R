@@ -1,6 +1,6 @@
-require(rstan)
-require(dplyr)
-require(coda)
+library(rstan)
+library(dplyr)
+library(coda)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

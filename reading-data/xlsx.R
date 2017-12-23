@@ -1,5 +1,5 @@
-require(readxl)
-require(openxlsx)
+library(readxl)
+library(openxlsx)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

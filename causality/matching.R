@@ -1,4 +1,4 @@
-require(Matching)
+library(Matching)
 
 data(lalonde)
 head(lalonde)

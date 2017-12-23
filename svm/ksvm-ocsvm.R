@@ -1,5 +1,5 @@
-require(kernlab)
-require(ggplot2)
+library(kernlab)
+library(ggplot2)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

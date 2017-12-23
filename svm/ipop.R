@@ -1,4 +1,4 @@
-require(kernlab)
+library(kernlab)
 
 featureMat <- as.matrix( iris[1:100, c(4,3)] )
 labelVec <- as.integer(iris$Species[1:100])

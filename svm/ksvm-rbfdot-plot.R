@@ -1,4 +1,4 @@
-require(kernlab)
+library(kernlab)
 
 set.seed(1500)
 

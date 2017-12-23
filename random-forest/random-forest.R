@@ -1,5 +1,5 @@
-require(randomForest)
-require(RColorBrewer)
+library(randomForest)
+library(RColorBrewer)
 
 set.seed(1500)
 

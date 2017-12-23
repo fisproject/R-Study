@@ -1,7 +1,7 @@
-require(DoE.base)
-require(reshape2)
-require(ggplot2)
-require(ggfortify)
+library(DoE.base)
+library(reshape2)
+library(ggplot2)
+library(ggfortify)
 
 # for car::Anova
 options(contrasts = c("contr.sum", "contr.sum"))

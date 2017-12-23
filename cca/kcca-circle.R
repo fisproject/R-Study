@@ -1,6 +1,6 @@
-require(kernlab)
-require(data.table)
-require(ggplot2)
+library(kernlab)
+library(data.table)
+library(ggplot2)
 
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)

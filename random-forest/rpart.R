@@ -1,5 +1,5 @@
-require(rpart)
-require(RColorBrewer)
+library(rpart)
+library(RColorBrewer)
 
 set.seed(1500)
 

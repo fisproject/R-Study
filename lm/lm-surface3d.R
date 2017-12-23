@@ -1,4 +1,4 @@
-require(rgl)
+library(rgl)
 
 # airquality : Daily air quality measurements in New York. May to September 1973.
 air <- na.omit(airquality)

@@ -1,5 +1,5 @@
-require(RMySQL)
-require(dplyr)
+library(RMySQL)
+library(dplyr)
 
 # http://dev.mysql.com/doc/index-other.html
 # $ mysql -u root -p mysql < world.sql

@@ -1,4 +1,4 @@
-require(MASS)
+library(MASS)
 
 head(housing)
 

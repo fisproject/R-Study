@@ -1,5 +1,5 @@
-require(tseries)
-require(forecast)
+library(tseries)
+library(forecast)
 
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)

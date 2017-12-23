@@ -1,5 +1,5 @@
-require(dplyr)
-require(data.table)
+library(dplyr)
+library(data.table)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

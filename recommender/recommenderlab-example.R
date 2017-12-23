@@ -1,4 +1,4 @@
-require(recommenderlab)
+library(recommenderlab)
 
 data(Jester5k)
 d.sample <- sample(Jester5k)

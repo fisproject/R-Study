@@ -1,7 +1,7 @@
 # http://www.stat.sc.edu/~hitchcock/stat599chap7Rcode.txt
-require(faraway)
-require(ggplot2)
-require(ggfortify)
+library(faraway)
+library(ggplot2)
+library(ggfortify)
 
 # 半導体ウェハの抵抗値測定 resitivity of wafer in semiconductor experiment
 data(wafer)

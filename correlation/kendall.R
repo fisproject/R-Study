@@ -1,4 +1,4 @@
-require(Kendall)
+library(Kendall)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

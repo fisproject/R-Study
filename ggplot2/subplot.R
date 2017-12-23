@@ -1,6 +1,6 @@
-require(ggplot2)
-require(ggfortify)
-require(purrr)
+library(ggplot2)
+library(ggfortify)
+library(purrr)
 
 d <- iris
 

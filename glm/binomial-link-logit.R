@@ -1,6 +1,6 @@
-require(MASS)
-require(ROCR)
-require(ggplot2)
+library(MASS)
+library(ROCR)
+library(ggplot2)
 
 data(mtcars)
 

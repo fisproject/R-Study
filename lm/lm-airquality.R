@@ -1,5 +1,5 @@
-require(car)
-require(ppcor)
+library(car)
+library(ppcor)
 
 # airquality : Daily air quality measurements in New York. May to September 1973.
 air <- na.omit(airquality)

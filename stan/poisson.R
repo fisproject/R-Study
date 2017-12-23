@@ -1,4 +1,4 @@
-require(rstan)
+library(rstan)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

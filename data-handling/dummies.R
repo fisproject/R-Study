@@ -1,4 +1,4 @@
-require(dummies)
+library(dummies)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

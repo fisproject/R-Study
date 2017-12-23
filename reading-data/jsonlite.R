@@ -1,6 +1,6 @@
-require(dplyr)
-require(jqr)
-require(jsonlite)
+library(dplyr)
+library(jqr)
+library(jsonlite)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

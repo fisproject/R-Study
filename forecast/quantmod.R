@@ -1,5 +1,5 @@
 # https://github.com/joshuaulrich/quantmod
-require(quantmod)
+library(quantmod)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

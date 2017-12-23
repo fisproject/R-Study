@@ -1,4 +1,4 @@
-require(forecast)
+library(forecast)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

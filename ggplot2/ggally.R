@@ -1,5 +1,5 @@
-require(ggplot2)
-require(GGally)
+library(ggplot2)
+library(GGally)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

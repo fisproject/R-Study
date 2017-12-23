@@ -1,5 +1,5 @@
-require(parallel)
-require(doParallel)
+library(parallel)
+library(doParallel)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)

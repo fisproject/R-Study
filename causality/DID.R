@@ -1,5 +1,5 @@
-require(foreign)
-require(ggplot2)
+library(foreign)
+library(ggplot2)
 
 # Panel data
 panel = read.dta("http://dss.princeton.edu/training/Panel101.dta")

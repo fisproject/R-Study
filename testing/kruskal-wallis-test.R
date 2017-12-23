@@ -1,5 +1,5 @@
 # Kruskal–Wallis-Test
-require(dplyr)
+library(dplyr)
 
 # iris
 kruskal.test(Sepal.Length ~ Petal.Width, data=iris)

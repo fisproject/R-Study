@@ -1,6 +1,6 @@
-require(ggplot2)
-require(ggfortify)
-require(numDeriv)
+library(ggplot2)
+library(ggfortify)
+library(numDeriv)
 
 set.seed(12345)
 

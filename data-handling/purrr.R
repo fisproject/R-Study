@@ -1,5 +1,5 @@
-require(dplyr)
-require(purrr)
+library(dplyr)
+library(purrr)
 
 # nested list
 attractions <- list(

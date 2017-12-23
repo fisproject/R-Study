@@ -1,7 +1,7 @@
-require(caret)
-require(kernlab)
-require(ggplot2)
-require(e1071)
+library(caret)
+library(kernlab)
+library(ggplot2)
+library(e1071)
 
 set.seed(1500)
 

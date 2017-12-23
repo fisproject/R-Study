@@ -1,4 +1,4 @@
-require(pwr)
+library(pwr)
 
 # Calc power
 power.t.test(

@@ -1,4 +1,4 @@
-require(kernlab)
+library(kernlab)
 
 n <- 150 # number of data points
 p <- 2 # dimension

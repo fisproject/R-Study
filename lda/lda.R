@@ -1,4 +1,4 @@
-require(MASS)
+library(MASS)
 
 sep <- 2 * (1:75) - 1
 iris.train <- iris[sep,]

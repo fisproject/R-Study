@@ -1,4 +1,4 @@
-require(xgboost)
+library(xgboost)
 
 # k-fold
 data(iris)
