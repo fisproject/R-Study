@@ -14,6 +14,7 @@ R Examples
 - **discrete-choice-model**: using {mlogit}, {MASS}, {ordinal}
 - **dlm**: Dynamic Linear models using {dlm}
 - **forecast**: econometric method using {tseries}, {forecast}, {quantmod}, {PerformanceAnalytics}
+- **functional-programming** functional programming in R
 - **garch**: GARCH and VaR using {rugarch}
 - **glm**: simple Generalized-Linear-Model using {stats}, {ROCR}
 - **ggplot2**: using {ggplot2}, {GGally}, {ggfortify}
@@ -23,6 +24,7 @@ R Examples
 - **lda**: linear-discriminant using {MASS}
 - **lm**: linear-model using {stats}
 - **lme**: linear-mixed-effects-model using {lme4}
+- **meta-programming**: meta programming in R
 - **naive-bayes**: naive-bayes using {e1071}
 - **pca**: (Kernel) Principal Component Analysis using {kernlab}
 - **random-forest**: Random Forest using {randomForest}
