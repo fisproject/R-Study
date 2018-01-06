@@ -1,4 +1,4 @@
-# 1. quote
+# 1. base::quote
 call1 <- quote(rnorm(5))
 
 call1
@@ -35,6 +35,17 @@ pryr::call_tree(call2)
 #       \- `x
 #       \-  2
 
+pryr::ast(sqrt(1 + x^2))
+# \- ()
+#   \- `sqrt
+#   \- ()
+#     \- `+
+#     \-  1
+#     \- ()
+#       \- `^
+#       \- `x
+#       \-  2
+
 call1[[1]] <- quote(runif)
 
 call1
@@ -47,7 +58,7 @@ call1
 # runif(5, min = -1)
 
 
-# 2. substitute
+# 2. base::substitute
 substitute(f(x + f(y)), list(f = quote(sin)))
 # sin(x + sin(y))
 
@@ -57,7 +68,24 @@ call4 <- call("rnorm", 5, mean = 3)
 identical(call3, call4)
 # [1] TRUE
 
+func1 <- function(x) substitute(x+1)
+func1(sqrt(2))
+# sqrt(2) + 1
 
-# 3. eval
+
+# 3. base::call
+call5 <- call("sqrt", 2)
+call5
+# sqrt(2)
+typeof(call5)
+# [1] "language"
+class(call5)
+# [1] "call"
+
+
+# 4. base::eval
 eval(call3)
 # [1] 3.148109 3.097713 1.560468 3.146791 4.420316
+
+eval(func1(sqrt(2)))
+# [1] 2.414214
