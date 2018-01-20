@@ -5,8 +5,8 @@ air <- na.omit(airquality)
 x1 <- air$Wind
 x2 <- air$Temp
 
-air.lm <-lm(Ozone ~ (x1+x2)^2, data = air)
-summary(air.lm)
+model.air <-lm(Ozone ~ (x1+x2)^2, data = air)
+summary(model.air)
 
 sapply(air, range)
 #       Ozone Solar.R Wind Temp Month Day

@@ -22,8 +22,8 @@ pcor(air)
 # Month   -0.1923602 -0.17190775 -0.07467615  0.43771581  1.00000000  0.04833785
 # Day      0.1155939 -0.04728812  0.05413314 -0.12748877  0.04833785  1.00000000
 
-air.lm <- lm(Ozone ~ Solar.R + Wind + Temp, data = air)
-summary(air.lm)
+model.air <- lm(Ozone ~ Solar.R + Wind + Temp, data = air)
+summary(model.air)
 # Coefficients:
 #              Estimate Std. Error t value Pr(>|t|)
 # (Intercept) -64.34208   23.05472  -2.791  0.00623 **
@@ -37,11 +37,11 @@ summary(air.lm)
 # Multiple R-squared:  0.6059,	Adjusted R-squared:  0.5948
 # F-statistic: 54.83 on 3 and 107 DF,  p-value: < 2.2e-16
 
-vif(air.lm)
+vif(model.air)
 # air$Solar.R    air$Wind    air$Temp
 #    1.095253    1.329070    1.431367
 
-step(air.lm)
+step(model.air)
 # Start:  AIC=681.71
 # Ozone ~ Solar.R + Wind + Temp
 #
@@ -60,4 +60,4 @@ step(air.lm)
 
 # diagnostic plots
 par(mfrow = c(2,2))
-plot(air.lm)
+plot(model.air)
