@@ -4,10 +4,11 @@ R-Study
 ## Overview
 R Examples
 
-- **arules**: association rules using {arules}
 - **arima**: AR, ARMA, ARIMA models using {stats}
-- **cca**: canonical-correlation-analysis using {kernlab}
+- **arules**: association rules using {arules}
+- **bayesian-network**: bayesian-network using {bnlearn}
 - **causality**: Causality Analysis using {Matching}, {fastICA}
+- **cca**: canonical-correlation-analysis using {kernlab}
 - **correlation**: using {psych}, {polycor}, {Kendall}, {vcdExtra}, {lsr}
 - **data-handling**: using {dplyr}, {tidyr}, {purrr}, {dummies}
 - **design-of-experiments**: using {DoE.base}
