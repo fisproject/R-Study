@@ -22,9 +22,9 @@ renamed <- iris %>%
 
 # Add new column
 iris_bool <- iris %>%
-  mutate(is_setosa = ifelse(Species == "setosa", T, F),
-         is_versicolor = ifelse(Species == "versicolor", T, F),
-         is_virginica = ifelse(Species == "virginica", T, F))
+  mutate(is_setosa = if_else(Species == "setosa", T, F),
+         is_versicolor = if_else(Species == "versicolor", T, F),
+         is_virginica = if_else(Species == "virginica", T, F))
 
 # Rank
 ranking <- iris %>%
