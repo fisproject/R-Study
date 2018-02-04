@@ -4,7 +4,8 @@ library(tidyr)
 data("gapminder", package = "gapminder")
 
 # total 142 countries
-gapminder %>% glimpse()
+gapminder %>%
+  glimpse()
 # Observations: 1,704
 # Variables: 6
 # $ country   (fctr) Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afghanis...
@@ -14,16 +15,22 @@ gapminder %>% glimpse()
 # $ pop       (int) 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12881816, 13867957, 16317921,...
 # $ gdpPercap (dbl) 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, 978.0114, 852.3959, 649.341...
 
-nest_by_country <- gapminder %>% group_by(continent, country) %>% nest()
+nest_by_country <- gapminder %>%
+  group_by(continent, country) %>%
+  nest()
 
-position <- gapminder$country %>% factor() %>% levels() %>% grep("Japan", .)
+position <- gapminder$country %>%
+  factor() %>%
+  levels() %>%
+  grep("Japan", .)
 
 japan <- nest_by_country$data[[position]]
 
 # linear model each country
 (do_by_country <- gapminder %>%
     group_by(country) %>%
-    do(data = lm(lifeExp ~ year + gdpPercap + pop , data = .) %>% broom::tidy()))
+    do(data = lm(lifeExp ~ year + gdpPercap + pop , data = .) %>%
+    broom::tidy()))
 
 lm.japan <- do_by_country$data[[position]]
 summary(lm.japan)
@@ -40,4 +47,5 @@ summary(lm.japan)
 # Multiple R-squared:  0.9919,	Adjusted R-squared:  0.9888
 # F-statistic: 324.7 on 3 and 8 DF,  p-value: 1.08e-08
 
-lm.all <- do_by_country %>% unnest()
+lm.all <- do_by_country %>%
+  unnest()

@@ -33,7 +33,8 @@ R Examples
 - **recommender**: recommendation algorithms using {recommenderlab}
 - **regularization**: L1/L2 Regularization and Elastic Net using {glmnet}, {useful}
 - **stan**: MCMC (NUTS) and ADVI using {rstan}
-- **stats**: basic-statistics
+- **stats**: basic statistics
+- **strings**: string manipulation using {stringr}
 - **svm**: Support Vector Machine using {kernlab}, {caret}
 - **testing**: Statistical Hypothesis Testing using {lawstat}, {pwr}
 - **transformation**: Box-Cox transformation using {car}
