@@ -28,27 +28,35 @@ jq(data.raw, ".")
 
 data.index <- data.raw %>% index() # same jqr::jq()
 
-data.index[1] %>% keys()
+data.index[1] %>%
+  keys()
 # [
 #     "code",
 #     "name"
 # ]
 
-data.index[1] %>% types()
+data.index[1] %>%
+  types()
 # [
 #     "number",
 #     "string"
 # ]
 
-data.index[1] %>% del(name)
+data.index[1] %>%
+  del(name)
 # {
 #     "code": 1
 # }
 
-data.raw %>% index %>%  dotstr(name)
+data.raw %>%
+  index %>%
+  dotstr(name)
 # [
 #     "カリブの海賊",
 #     "ビッグサンダー・マウンテン"
 # ]
 
-data.df <- data.raw %>% index() %>% string() %>% fromJSON(txt = .)
+data.df <- data.raw %>%
+  index() %>%
+  string() %>%
+  fromJSON(txt = .)
