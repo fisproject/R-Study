@@ -21,7 +21,7 @@ R Examples
 - **ggplot2**: using {ggplot2}, {GGally}, {ggfortify}
 - **gradient-boosting**: Gradient Boosting using {xgboost}
 - **kmeans**: k-means clustering using {stats}
-- **knn**: k-nearest neighbor using {class}
+- **knn**: k-nearest neighbor using {class}, {FNN}
 - **lda**: linear-discriminant using {MASS}
 - **lm**: linear-model using {stats}
 - **lme**: linear-mixed-effects-model using {lme4}
