@@ -30,8 +30,9 @@ table(df$y)
 df_pc <- prcomp(df[,-5], scale = TRUE)
 pc <- data.frame(pc1 = df_pc$x[,1], pc2 = df_pc$x[,2], label = df[,5])
 g <- ggplot(pc, aes(x = pc1, y = pc2)) +
-  geom_point(aes(colour = label), alpha = 1) +
-  labs(title = "PCA", x = "pc1", y = "pc2")
+  geom_point(aes(colour = label), alpha = 1, size = 2.5) +
+  labs(title = "PCA", x = "pc1", y = "pc2") +
+  lims(x = c(-15, 15), y = c(-20, 20))
 plot(g)
 
 # calculate anomaly score
@@ -121,3 +122,22 @@ sum(pred == test_y)/length(test_y)
 
 calc_f(pred, test_y)
 # [1] 0.5
+
+# evaluation
+df_eval <- df[701:n,] %>%
+  mutate(label = y,
+         pred = pred,
+         pc1 = pc$pc1[701:n],
+         pc2 = pc$pc2[701:n]) %>%
+  mutate(eval = if_else((y == T & pred == T) == T, "TP",
+                if_else((y == F & pred == F) == T, "TN",
+                if_else((y == T & pred == F) == T, "FP",
+                if_else((y == F & pred == T) == T, "FN", "")))))
+
+df_eval$eval <- as.factor(df_eval$eval)
+
+g <- ggplot(df_eval, aes(x = pc1, y = pc2)) +
+  geom_point(aes(colour = label, shape = eval), alpha = 1, size = 2.5) +
+  labs(title = "PCA", x = "pc1", y = "pc2") +
+  lims(x = c(-15, 15), y = c(-20, 20))
+plot(g)
