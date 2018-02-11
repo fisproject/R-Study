@@ -20,8 +20,14 @@ test_y <- c(se$Species[26:50], ve$Species[26:50], vi$Species[26:50])
 # knn
 res <- knn(train_X, test = test_X, cl = train_y, k = 3, prob = TRUE)
 table(res)
+# res
+#  1  2  3
+# 25 27 23
 
 table(test_y)
+# test_y
+#  1  2  3
+# 25 25 25
 
 # accuracy
 sum(res == test_y)/length(test_y)
