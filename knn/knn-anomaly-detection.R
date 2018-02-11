@@ -27,9 +27,9 @@ table(df$y)
 # 980    20
 
 # PCA
-df_pc <- prcomp(df[,-5], scale = TRUE)
-pc <- data.frame(pc1 = df_pc$x[,1], pc2 = df_pc$x[,2], label = df[,5])
-g <- ggplot(pc, aes(x = pc1, y = pc2)) +
+pc <- prcomp(df[,-5], scale = TRUE)
+df_pc <- data.frame(pc1 = pc$x[,1], pc2 = pc$x[,2], label = df[,5])
+g <- ggplot(df_pc, aes(x = pc1, y = pc2)) +
   geom_point(aes(colour = label), alpha = 1, size = 2.5) +
   labs(title = "PCA", x = "pc1", y = "pc2") +
   lims(x = c(-15, 15), y = c(-20, 20))
@@ -127,8 +127,8 @@ calc_f(pred, test_y)
 df_eval <- df[701:n,] %>%
   mutate(label = y,
          pred = pred,
-         pc1 = pc$pc1[701:n],
-         pc2 = pc$pc2[701:n]) %>%
+         pc1 = df_pc$pc1[701:n],
+         pc2 = df_pc$pc2[701:n]) %>%
   mutate(eval = if_else((y == T & pred == T) == T, "TP",
                 if_else((y == F & pred == F) == T, "TN",
                 if_else((y == T & pred == F) == T, "FP",
