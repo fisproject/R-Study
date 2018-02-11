@@ -18,7 +18,7 @@ head(d)
 # 5     81         78         56       66     71       83      47
 # 6     43         55         49       44     54       49      34
 
-attitude.pc <- prcomp(d[,2:6], scale=TRUE)
+attitude.pc <- prcomp(d[,2:6], scale = TRUE)
 
 # 各主成分の標準偏差, 寄与率, 累積寄与率
 summary(attitude.pc)
@@ -41,22 +41,13 @@ attitude.pc$rotation
 screeplot(attitude.pc)
 
 # 主成分得点
-biplot(attitude.pc, choices=c(1, 2))
+biplot(attitude.pc, choices = c(1, 2))
 
-pc <- data.frame(
-    pc1=attitude.pc$x[,1],
-    pc2=attitude.pc$x[,2],
-    label=d[,1]
-)
+pc <- data.frame(pc1 = attitude.pc$x[,1],
+                 pc2 = attitude.pc$x[,2],
+                 label = d[,1])
 
-p <- ggplot(
-  pc,
-  aes(
-    x=pc1,
-    y=pc2
-  )
-)
-
-g <- p + geom_point(aes(colour=label), alpha=1) +
-      labs(title="attitude-pca", x="pc1", y="pc2")
+p <- ggplot(pc, aes(x = pc1, y = pc2))
+g <- p + geom_point(aes(colour = label), alpha = 1) +
+      labs(title = "attitude-pca", x = "pc1", y = "pc2")
 plot(g)
