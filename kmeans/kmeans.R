@@ -64,7 +64,7 @@ df_pca <- data.frame(
 
 g <- ggplot(df_pca, aes(x = pc1, y = pc2, shape = label))
 p <- g + geom_point(aes(colour = cluster), size = 4) +
-      labs(title = "K-means", x = "PC1", y="PC2") +
+      labs(title = "K-means", x = "PC1", y = "PC2") +
       scale_colour_hue()
 plot(p)
 
