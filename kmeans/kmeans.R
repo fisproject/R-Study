@@ -7,7 +7,7 @@ setwd(dirname(frame_files[[length(frame_files)]]))
 
 set.seed(12345)
 
-wine <- read.csv("data/wine.data", header=FALSE)
+wine <- read.csv("data/wine.data", header = FALSE)
 colnames(wine) <- c("class","Alcohol","Malic Acid","Ash","Alcalinity of Ash","Magnesium",
                     "Total Phenols","Flavanoids","Nonflavanoid Phenols","Proanthocyanins",
                     "Color Intensity","Hue","0D280/OD315 of Diluted Wines","Proline")
@@ -18,7 +18,7 @@ wine <- scale(wine)
 wine.unlabeled <- wine[,c(-1)]
 
 # K-means
-wine.km <- kmeans(wine.unlabeled, centers=3)
+wine.km <- kmeans(wine.unlabeled, centers = 3)
 summary(as.factor(wine.km$cluster))
 table(wine.class, wine.km$cluster)
 # wine.class  1  2  3
@@ -27,9 +27,7 @@ table(wine.class, wine.km$cluster)
 #          3  0 48  0
 
 # PCA
-pca <- prcomp(wine.unlabeled, scale=TRUE)
-pc1 <- pca$x[,1]
-pc2 <- pca$x[,2]
+pca <- prcomp(wine.unlabeled, scale = TRUE)
 
 summary(pca)
 # Importance of components:
@@ -54,37 +52,30 @@ pca$rotation
 # 0D280/OD315 of Diluted Wines -0.376167411 -0.164496193  0.16600459 -0.18412074 -0.10116099
 # Proline                      -0.286752227  0.364902832 -0.12674592  0.23207086 -0.15786880
 
-biplot(pca, choices=c(1, 2))
+biplot(pca, choices = c(1, 2))
 
-r <- data.frame(
-  x=pc1,
-  y=pc2,
-  cluster=as.factor(wine.km$cluster),
-  label=wine.class,
-  index=wine.index
+df_pca <- data.frame(
+  pc1 = pca$x[,1],
+  pc2 = pca$x[,2],
+  cluster = as.factor(wine.km$cluster),
+  label = wine.class,
+  index = wine.index
 )
 
-g <- ggplot(
-  r,
-  aes(
-    x=x,
-    y=y,
-    shape=label
-  )
-)
-
-p <- g + geom_point(aes(colour=cluster), size=4) +
-      labs(title='K-means', x="PC1", y="PC2") +
+g <- ggplot(df_pca, aes(x = pc1, y = pc2, shape = label))
+p <- g + geom_point(aes(colour = cluster), size = 4) +
+      labs(title = "K-means", x = "PC1", y="PC2") +
       scale_colour_hue()
 plot(p)
 
-p <- g + geom_point(aes(colour=cluster), size=4) +
-      labs(title='K-means', x="PC1", y="PC2") + scale_colour_hue() +
-      geom_text(aes(label=index), hjust=0, vjust=0, size=4)
+p <- g + geom_point(aes(colour = cluster), size = 4) +
+      labs(title = "K-means", x = "PC1", y = "PC2") +
+      scale_colour_hue() +
+      geom_text(aes(label = index), hjust = 0, vjust = 0, size = 4)
 plot(p)
 
 # Hartigan's Method
-wine.fit <- FitKMeans(wine.unlabeled, max.clusters=20, nstart=25, seed=12345)
+wine.fit <- FitKMeans(wine.unlabeled, max.clusters = 20, nstart = 25, seed = 12345)
 # Clusters  Hartigan AddCluster
 # 1         2 69.523332       TRUE
 # 2         3 52.151051       TRUE
