@@ -31,7 +31,7 @@ is.infinite(x)
 is.finite(x)
 # [1] FALSE FALSE FALSE FALSE
 
-df <- tibble(x = c(1,2,3), y = c(1, NA, 3))
+df <- tibble(x = c(1, 2, 3), y = c(1, NA, 3))
 glimpse(df)
 # Observations: 3
 # Variables: 2
