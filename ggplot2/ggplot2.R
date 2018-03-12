@@ -11,7 +11,8 @@ setwd(dirname(frame_files[[length(frame_files)]]))
 g <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species, size = Petal.Length)) +
   geom_point() +
   scale_colour_hue() +
-  labs(title = "Iris", x = "Sepal.Length", y = "Sepal.Width")
+  labs(title = "Iris", x = "Sepal.Length", y = "Sepal.Width") +
+  lims(x = c(4, 8), y = c(1, 5))
   # scale_colour_gradient(low="cyan", high="magenta")
 plot(g)
 ggsave("img/iris-hue.png", g)
@@ -33,11 +34,14 @@ plot(g)
 ggsave("img/iris-hist.png", g)
 
 # Stacked Bar
-g <- ggplot(
-    iris %>% group_by(Species, Sepal.Length) %>% summarize(count = n()),
-    aes(x = Sepal.Length, y = count)) +
+df_summary <- iris %>%
+  group_by(Species, Sepal.Length) %>%
+  summarize(count = n())
+
+g <- ggplot(df_summary, aes(x = Sepal.Length, y = count)) +
   geom_bar(stat = "identity", aes(fill = Species)) +
-  scale_x_discrete() + xlim(4,8)
+  scale_x_discrete() +
+  xlim(4, 8)
 plot(g)
 ggsave("img/iris-stacked-bar.png", g)
 
