@@ -1,4 +1,5 @@
 library(ggplot2)
+
 # attitude : Attitudes Toward Supervisors
 # Y	    rating	numeric	Overall rating
 # X[1]	complaints	numeric	Handling of employee complaints
@@ -8,20 +9,21 @@ library(ggplot2)
 # X[5]	critical	numeric	Too critical
 # X[6]	advancel	numeric	Advancement
 
-d <- attitude
-head(d)
-#      rating complaints privileges learning raises critical advance
-# 1     43         51         30       39     61       92      45
-# 2     63         64         51       54     63       73      47
-# 3     71         70         68       69     76       86      48
-# 4     61         63         45       47     54       84      35
-# 5     81         78         56       66     71       83      47
-# 6     43         55         49       44     54       49      34
+tibble::glimpse(attitude)
+# Observations: 30
+# Variables: 7
+# $ rating     <dbl> 43, 63, 71, 61, 81, 43, 58, 71, 72, 67, 64, 67, 69, 68, 77, 8...
+# $ complaints <dbl> 51, 64, 70, 63, 78, 55, 67, 75, 82, 61, 53, 60, 62, 83, 77, 9...
+# $ privileges <dbl> 30, 51, 68, 45, 56, 49, 42, 50, 72, 45, 53, 47, 57, 83, 54, 5...
+# $ learning   <dbl> 39, 54, 69, 47, 66, 44, 56, 55, 67, 47, 58, 39, 42, 45, 72, 7...
+# $ raises     <dbl> 61, 63, 76, 54, 71, 54, 66, 70, 71, 62, 58, 59, 55, 59, 79, 6...
+# $ critical   <dbl> 92, 73, 86, 84, 83, 49, 68, 66, 83, 80, 67, 74, 63, 77, 77, 5...
+# $ advance    <dbl> 45, 47, 48, 35, 47, 34, 35, 41, 31, 41, 34, 41, 25, 35, 46, 3...
 
-attitude.pc <- prcomp(d[,2:6], scale = TRUE)
+attitude_pc <- prcomp(attitude[,-1], scale = TRUE)
 
 # 各主成分の標準偏差, 寄与率, 累積寄与率
-summary(attitude.pc)
+summary(attitude_pc)
 # Importance of components:
 #                           PC1    PC2    PC3     PC4     PC5     PC6     PC7
 # Standard deviation     1.9278 1.0681 0.9204 0.78286 0.56892 0.46747 0.37475
@@ -29,7 +31,7 @@ summary(attitude.pc)
 # Cumulative Proportion  0.5309 0.6939 0.8149 0.90248 0.94872 0.97994 1.00000
 
 # Rotation : 各主成分の固有ベクトル (合成変数の意味)
-attitude.pc$rotation
+attitude_pc$rotation
 # PC1        PC2         PC3        PC4        PC5
 # complaints 0.5090589 -0.1415816  0.04991461  0.7029582  0.4734681
 # privileges 0.4352465 -0.2315203 -0.83038342 -0.1716099 -0.1948647
@@ -37,17 +39,17 @@ attitude.pc$rotation
 # raises     0.5150975  0.1559771  0.37358608  0.1328045 -0.7437352
 # critical   0.2269964  0.9189940 -0.16714239 -0.1308392  0.2426256
 
-# Eigenvalue
-screeplot(attitude.pc)
+# the proportion of the total variation
+screeplot(attitude_pc)
 
 # 主成分得点
-biplot(attitude.pc, choices = c(1, 2))
+biplot(attitude_pc, choices = c(1, 2))
 
-pc <- data.frame(pc1 = attitude.pc$x[,1],
-                 pc2 = attitude.pc$x[,2],
-                 label = d[,1])
+pc <- data.frame(pc1 = attitude_pc$x[,1],
+                 pc2 = attitude_pc$x[,2],
+                 label = attitude$rating)
 
-p <- ggplot(pc, aes(x = pc1, y = pc2))
-g <- p + geom_point(aes(colour = label), alpha = 1) +
-      labs(title = "attitude-pca", x = "pc1", y = "pc2")
+g <- ggplot(pc, aes(x = pc1, y = pc2)) +
+  geom_point(aes(colour = label), alpha = 1) +
+  labs(title = "attitude-pca", x = "pc1", y = "pc2")
 plot(g)

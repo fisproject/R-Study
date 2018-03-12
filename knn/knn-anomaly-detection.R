@@ -136,6 +136,17 @@ df_eval <- df[701:n,] %>%
 
 df_eval$eval <- as.factor(df_eval$eval)
 
+df_eval %>%
+  group_by(eval) %>%
+  summarise(n = n())
+# # A tibble: 4 x 2
+#   eval      n
+#   <fct> <int>
+# 1 FN        3
+# 2 FP        3
+# 3 TN      291
+# 4 TP        3
+
 g <- ggplot(df_eval, aes(x = pc1, y = pc2)) +
   geom_point(aes(colour = label, shape = eval), alpha = 1, size = 2.5) +
   labs(title = "PCA", x = "pc1", y = "pc2") +

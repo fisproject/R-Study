@@ -1,18 +1,17 @@
 library(rgl)
 library(ggplot2)
-library(data.table)
 library(kernlab)
 
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)
 setwd(dirname(frame_files[[length(frame_files)]]))
 
-d <- data.frame(fread("data/circle.csv"))
+d <- read.csv("data/circle.csv")
+colnames(d) <- c("V1", "V2", "V3")
 
-p <- ggplot(d, aes(x = V1, y = V2))
-
-g <- p + geom_point(aes(colour = factor(V3)), alpha = 1) +
-      labs(title = "circle", x = "x1", y = "x2")
+g <- ggplot(d, aes(x = V1, y = V2)) +
+  geom_point(aes(colour = factor(V3)), alpha = 1) +
+  labs(title = "circle", x = "x1", y = "x2")
 plot(g)
 
 # nonlinear conversion
@@ -27,7 +26,8 @@ plot3d(answer$x1, answer$x2, answer$x3,
 
 # kernel pca
 dd <- data.frame(scale(d))
-d.kcpa <- kpca(~.,
+
+d.kcpa <- kpca( ~ .,
                data = dd[,1:2],
                kernel = "rbfdot",
                features = 3,
