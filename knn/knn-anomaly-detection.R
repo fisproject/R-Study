@@ -57,7 +57,7 @@ calc_anomaly <- function(y, idx) {
 }
 
 # calculate F-value
-calc_f <- function(pred, y) {
+calc_f1 <- function(pred, y) {
   rec <- sum(y & pred) / sum(y)
   prec <- sum(y & pred) / sum(pred)
   2 * prec * rec / (prec + rec)
@@ -80,7 +80,7 @@ for (k in ks) {
     # calculate anomaly score
     scores <- calc_anomaly(train_y, nn_idx)
     pred <- if_else(scores > th, T, F)
-    f_val <- calc_f(train_y, pred)
+    f_val <- calc_f1(train_y, pred)
 
     params <- rbind(params, c(f_val, k, th))
   }
@@ -103,6 +103,7 @@ res <- knn.cv(train = df[,-5],
 # index of k nearest neighbors
 nn_idx <- attr(res, "nn.index")
 
+# evaluation
 scores <- calc_anomaly(df[,5], nn_idx)
 pred <- if_else(scores > best_th, T, F)[701:n]
 
@@ -120,10 +121,6 @@ table(test_y)
 sum(pred == test_y)/length(test_y)
 # [1] 0.98
 
-calc_f(pred, test_y)
-# [1] 0.5
-
-# evaluation
 df_eval <- df[701:n,] %>%
   mutate(label = y,
          pred = pred,
@@ -146,6 +143,9 @@ df_eval %>%
 # 2 FP        3
 # 3 TN      291
 # 4 TP        3
+
+calc_f1(pred, test_y)
+# [1] 0.5
 
 g <- ggplot(df_eval, aes(x = pc1, y = pc2)) +
   geom_point(aes(colour = label, shape = eval), alpha = 1, size = 2.5) +
