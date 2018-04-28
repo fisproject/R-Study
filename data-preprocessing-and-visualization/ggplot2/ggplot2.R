@@ -38,8 +38,8 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = ..density..,
 plot(p)
 ggsave("img/iris-hist.png", plot = p)
 
-# Point & Smoothing $ Rect
-p <- ggplot(economics, aes(x = date, y = psavert)) + 
+# Line & Smoothing $ Rect
+p <- ggplot(economics, aes(x = date, y = psavert)) +
   annotate("rect",
            xmin = as.Date("2008-09-15"), xmax = as.Date("2015-04-01"),
            ymin = 0, ymax = Inf, fill = "magenta", alpha = 0.1) +
