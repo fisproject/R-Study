@@ -20,11 +20,11 @@ R Examples
 | data-generation | data generation | {MASS}  |
 | data-handling         | data handling            | {dplyr}, {tidyr}, {purrr}, {dummies}        |
 | ggplot2          | visualization            | {ggplot2}, {GGally}, {ggfortify}        |
-| reading-data          | reading data            | {data.table}, {jsonlite}, {jqr}, {readxl}, {openxlsx}, {RMySQL}        |
+| reading-data          | reading data            | {data.table}, {jsonlite}, {jqr}, {readxl}, {openxlsx}, {RMySQL}, {aws.s3}       |
 | stats          | basic statistics            | {base}        |
 | strings          | string manipulation in R            | {stringr}        |
 | transformation          | Box-Cox transformation            | {car}        |
-
+| lubridate          | Make Dealing with Dates            | {lubridate}        |
 
 #### Statistical Model
 
