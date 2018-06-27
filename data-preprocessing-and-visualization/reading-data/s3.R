@@ -1,4 +1,4 @@
-library("aws.s3")
+library(aws.s3)
 library(dplyr)
 
 Sys.setenv("AWS_ACCESS_KEY_ID" = "[ACCESS_KEY]",
