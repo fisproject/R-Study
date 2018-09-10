@@ -86,6 +86,20 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 plot(p)
 ggsave("img/iris-heatmap.png", plot = p)
 
+# Line & Point
+tf <- rep(F, 150)
+tf[which.min(iris$Sepal.Width)] <- T
+df <- data.frame(x = c(1:150), y = iris$Sepal.Width, tf)
+
+p <- ggplot(df, aes(x = x, y = y, color = ifelse(tf == T,"A", "B")))+
+  geom_point(size = 3) +
+  scale_color_manual(guide = FALSE, values = c("red", "black")) +
+  geom_line(data = df, aes(x = x, y = y, color = "B")) +
+  labs(title = "Iris", x = "Index", y = "Sepal.Width")
+
+plot(p)
+ggsave("img/iris-conditional-coloring.png", plot = p)
+
 # Contours of 3d data
 volcano3d <- reshape2::melt(volcano)
 names(volcano3d) <- c("x", "y", "z")
