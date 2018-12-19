@@ -91,7 +91,7 @@ tf <- rep(F, 150)
 tf[which.min(iris$Sepal.Width)] <- T
 df <- data.frame(x = c(1:150), y = iris$Sepal.Width, tf)
 
-p <- ggplot(df, aes(x = x, y = y, color = ifelse(tf == T,"A", "B")))+
+p <- ggplot(df, aes(x = x, y = y, color = ifelse(tf == T, "A", "B")))+
   geom_point(size = 3) +
   scale_color_manual(guide = FALSE, values = c("red", "black")) +
   geom_line(data = df, aes(x = x, y = y, color = "B")) +
