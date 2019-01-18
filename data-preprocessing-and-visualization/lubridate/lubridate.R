@@ -29,3 +29,17 @@ df_season <- df_ct %>%
         month >= 9 & month < 12 ~ "autumn",
         TRUE ~ "winter"),
       levels = c("spring", "summer", "autumn", "winter")))
+
+airport <- tibble(arrive_str = c("2018-01-01T01:00:00",
+                                 "2018-01-10 12:30:20",
+                                 "2018/01/20 08:00:20"),
+                  leave_str = c("2018-01-01T03:05:00",
+                                "2018-01-11 12:30:20",
+                                "2018/01/20 11:00:20")) %>%
+    mutate(arrive = ymd_hms(arrive_str, tz = "Asia/Tokyo"),
+           leave = ymd_hms(leave_str, tz = "Asia/Tokyo")) %>%
+    mutate(iv = interval(arrive, leave)) %>%
+    mutate(diff_weeks = iv / dweeks(1),
+           diff_days = iv/ ddays(1),
+           diff_hours = iv / dhours(1),
+           diff_minutes = iv / dminutes(1))
