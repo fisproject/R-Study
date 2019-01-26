@@ -5,7 +5,12 @@ library(lubridate)
 df <- tibble(dt = c("2018-01-01T01:00:00",
                     "2018-04-10T12:30:20",
                     "2018-08-01T14:50:30",
-                    "2018-10-10T14:50:30"))
+                    "2018-10-10T18:52:30"))
+
+df %>%
+  mutate(dt_ct = ymd_hms(dt)) %>%
+  filter(dt_ct > as.POSIXct("2018-04-11 01:20:04", tz = "UTC")) %>%
+  count() # 2
 
 df_ct <- df %>%
   mutate(dt_ct = as.POSIXct(dt, format = "%Y-%m-%dT%H:%M:%S")) %>%

@@ -210,3 +210,21 @@ df1 %>%
 #       x     y
 #   <dbl> <dbl>
 # 1     3     3
+
+# Transpose matrix
+t(df1) %>%
+  as_tibble()
+# # A tibble: 2 x 3
+# V1    V2    V3
+# <dbl> <dbl> <dbl>
+#   1     1     2     3
+#   2     1     2     3
+
+# Transpose with column name
+cbind(name = names(df1), t(df1)) %>%
+  as_tibble()
+# # A tibble: 2 x 4
+#   name  V2    V3    V4   
+#   <chr> <chr> <chr> <chr>
+# 1 x     1     2     3    
+# 2 y     1     2     3    
