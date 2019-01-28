@@ -23,7 +23,9 @@ df_ct <- df %>%
     hour = hour(dt_ct),
     minute = minute(dt_ct),
     second = second(dt_ct),
-    dt_str = format(dt_ct, "%Y-%m-%d %H:%M:%S"))
+    dt_str = format(dt_ct, "%Y-%m-%d %H:%M:%S"),
+    end_of_month = ymd(stringr::str_c(format(dt_ct, format = "%y-%m"), "-",
+                                             days_in_month(dt_ct))))
 
 df_season <- df_ct %>%
   mutate(
