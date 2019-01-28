@@ -14,7 +14,6 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width,
   # scale_colour_gradient(low = "cyan", high = "magenta")
   labs(title = "Iris", x = "Sepal.Length", y = "Sepal.Width") +
   lims(x = c(4, 8), y = c(1, 5))
-
 plot(p)
 ggsave("img/iris-hue.png", plot = p)
 
@@ -24,7 +23,6 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width,
   geom_point() +
   stat_smooth(method = "lm") +
   labs(title = "Iris", x = "Sepal.Length", y = "Sepal.Width")
-
 plot(p)
 ggsave("img/iris-smooth.png", plot = p)
 
@@ -34,7 +32,6 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = ..density..,
   geom_histogram(alpha = 0.3, position = "identity", bins = 20, size = 1) +
   labs(title = "Iris", x = "Sepal.Length") +
   geom_density(alpha = 0)
-
 plot(p)
 ggsave("img/iris-hist.png", plot = p)
 
@@ -46,26 +43,24 @@ p <- ggplot(economics, aes(x = date, y = psavert)) +
   geom_line() +
   stat_smooth(color = "cyan", method = "loess") +
   labs(title = "Economics", x = "Date", y = "psavert")
-
 plot(p)
 ggsave("img/economics-line.png", p)
 
 # Stacked Bar
 p <- iris %>%
   group_by(Species, Sepal.Length) %>%
-  summarize(count = n()) %>%
-  ggplot(., aes(x = Sepal.Length, y = count)) +
+  count() %>%
+  ggplot(aes(x = Sepal.Length, y = n)) +
     geom_bar(stat = "identity", aes(fill = Species), alpha = 0.7) +
     scale_x_discrete() +
-    lims(x = c(4, 8))
-
+    lims(x = c(4, 8)) +
+    labs(title = "Iris", x = "Sepal.Length", y = "count")
 plot(p)
 ggsave("img/iris-stacked-bar.png", plot = p)
 
 # Tile plot
 p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_tile(aes(fill = Species))
-
 plot(p)
 ggsave("img/iris-tile.png", plot = p)
 
@@ -73,7 +68,6 @@ ggsave("img/iris-tile.png", plot = p)
 p <- qplot(Sepal.Length, Sepal.Width, data = iris,
            fill = Petal.Length, geom = "tile") +
   scale_fill_gradient(limits = c(0, 6), low = "white", high = "black")
-
 plot(p)
 ggsave("img/iris-tile-qplot.png", plot = p)
 
@@ -82,9 +76,17 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
   stat_density2d(aes(fill = ..level..), geom = "polygon") +
   scale_fill_continuous(low = "cyan", high = "magenta") +
   geom_point(color = "black")
-
 plot(p)
 ggsave("img/iris-heatmap.png", plot = p)
+
+# Stacked Line
+p <- iris %>%
+  mutate(index = c(c(1:50), c(1:50), c(1:50))) %>%
+  ggplot(aes(x = index, y = Petal.Length)) +
+    geom_area(aes(group = Species, fill = Species), alpha = 0.7) +
+    labs(title = "Iris", x = "Index", y = "Petal.Length")
+plot(p)
+ggsave("img/iris-stacked-line.png", plot = p)
 
 # Line & Point
 tf <- rep(F, 150)
@@ -96,7 +98,6 @@ p <- ggplot(df, aes(x = x, y = y, color = ifelse(tf == T, "A", "B")))+
   scale_color_manual(guide = FALSE, values = c("red", "black")) +
   geom_line(data = df, aes(x = x, y = y, color = "B")) +
   labs(title = "Iris", x = "Index", y = "Sepal.Width")
-
 plot(p)
 ggsave("img/iris-conditional-coloring.png", plot = p)
 
@@ -107,6 +108,5 @@ names(volcano3d) <- c("x", "y", "z")
 p <- ggplot(volcano3d, aes(x = x, y = y, z = z)) +
   stat_contour(aes(fill = ..level..), geom = "polygon") +
   scale_fill_continuous(low = "gray", high = "black")
-
 plot(p)
 ggsave("img/volcano-contours.png", plot = p)
