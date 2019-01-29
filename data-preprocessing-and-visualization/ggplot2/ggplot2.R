@@ -1,5 +1,6 @@
 library(dplyr)
 library(ggplot2)
+library(ggrepel)
 
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
@@ -44,7 +45,7 @@ p <- ggplot(economics, aes(x = date, y = psavert)) +
   stat_smooth(color = "cyan", method = "loess") +
   labs(title = "Economics", x = "Date", y = "psavert")
 plot(p)
-ggsave("img/economics-line.png", p)
+ggsave("img/economics-line.png", plot = p)
 
 # Stacked Bar
 p <- iris %>%
@@ -80,13 +81,30 @@ plot(p)
 ggsave("img/iris-heatmap.png", plot = p)
 
 # Stacked Line
-p <- iris %>%
-  mutate(index = c(c(1:50), c(1:50), c(1:50))) %>%
+iris_with_idx <- iris %>%
+  mutate(index = c(c(1:50), c(1:50), c(1:50)))
+
+p <- iris_with_idx %>%
   ggplot(aes(x = index, y = Petal.Length)) +
-    geom_area(aes(group = Species, fill = Species), alpha = 0.7) +
-    labs(title = "Iris", x = "Index", y = "Petal.Length")
+  geom_area(aes(group = Species, fill = Species), alpha = 0.7) +
+  labs(title = "Iris", x = "Index", y = "Petal.Length")
 plot(p)
 ggsave("img/iris-stacked-line.png", plot = p)
+
+# Line with label
+p <- iris_with_idx %>%
+  ggplot(aes(x = index, y = Petal.Length, color = Species)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Iris", x = "Index", y = "Petal.Length") +
+  geom_label_repel(data = subset(iris_with_idx, index == max(index)),
+                   aes(label = Species),
+                   nudge_x = 100,
+                   segment.alpha = 0.9,
+                   size = 3) +
+  theme(legend.position = "none")
+plot(p)
+ggsave("img/iris-line-with-label.png", plot = p)
 
 # Line & Point
 tf <- rep(F, 150)
