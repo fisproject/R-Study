@@ -1,3 +1,6 @@
+library(dplyr)
+library(tseries)
+
 # change working directory
 frame_files <- lapply(sys.frames(), function(x) x$ofile)
 frame_files <- Filter(Negate(is.null), frame_files)
@@ -5,17 +8,14 @@ setwd(dirname(frame_files[[length(frame_files)]]))
 
 # convert char-code "nkf -w --overwrite filename"
 df <- read.csv("data/7201.T.csv", header = T)
-
 names(df) <- c("Date", "Open", "High", "Low", "Close", "Volume", "Adjusted")
+df$Date <- df$Date %>% as.Date()
 
-df <- df %>% filter(as.Date(df$Date) > as.Date('2010/01/01'))
-df.zoo <- zoo::zoo(df$Close, order.by = as.Date(df$Date, format = '%Y/%m/%d'))
-# to time-series
-close <- ts(df.zoo)
+df <- df %>% filter(Date > as.Date('2010/01/01'))
+df.zoo <- zoo::zoo(df$Close, order.by = df$Date)
+close <- ts(df.zoo) # to time-series
 
-head(close)
-
-tseries::adf.test(close)
+adf.test(close)
 # Augmented Dickey-Fuller Test
 #
 # data:  close
@@ -30,7 +30,7 @@ PP.test(close)
 
 close.diff <- diff(log(close))
 
-tseries::adf.test(close.diff)
+adf.test(close.diff)
 # Augmented Dickey-Fuller Test
 #
 # data:  close.diff
@@ -44,31 +44,41 @@ PP.test(close.diff)
 # Dickey-Fuller = -35.791, Truncation lag parameter = 7, p-value = 0.01
 
 # AR model
-model.ar = ar(close.diff, aic = TRUE, model = "ols")
+model <- ar(close.diff, aic = TRUE, method = "ols")
 
-model.ar$order
+model$order
  #[1] 0
 
-model.ar$x.mean
+model$x.mean
 # [1] 0.0003618929
 
-head(model.ar$resid, 20)
-# [1] -0.016421534 -0.005355661 -0.011689893  0.020928830  0.019270639 -0.028706366
-# [7]  0.003381093 -0.002855660 -0.026928920 -0.015866079 -0.013468240  0.008830555
-# [13] -0.020164520 -0.012434474 -0.019436041 -0.021210459  0.027340710  0.005087712
-# [19] -0.020952874  0.033724570
-
-plot(model.ar$resid)
+plot(model$resid)
 
 # Eval
-tseries::jarque.bera.test(model.ar$resid[7:200])
+tseries::jarque.bera.test(model$resid[7:200])
 # Jarque Bera Test
 #
-# data:  model.ar$resid[7:200]
+# data:  model$resid[7:200]
 # X-squared = 0.90988, df = 2, p-value = 0.6345
 
-Box.test(model.ar$resid[7:200], lag = 30)
+Box.test(model$resid[7:200], lag = 30)
 # Box-Pierce test
 #
-# data:  model.ar$resid[7:200]
+# data:  model$resid[7:200]
 # X-squared = 23.125, df = 30, p-value = 0.8101
+
+# Prediction
+prediction <- predict(model, tail(close.diff, n = 1), n.ahead = 1)
+# $pred
+# Time Series:
+# Start = 2 
+# End = 2 
+# Frequency = 1 
+# [1] 0.0003618929
+
+# $se
+# Time Series:
+# Start = 2 
+# End = 2 
+# Frequency = 1 
+# [1] 0.01885173

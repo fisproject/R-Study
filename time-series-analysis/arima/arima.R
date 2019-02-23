@@ -1,3 +1,4 @@
+library(dplyr)
 library(forecast)
 
 # change working directory
@@ -7,14 +8,12 @@ setwd(dirname(frame_files[[length(frame_files)]]))
 
 # convert char-code "nkf -w --overwrite filename"
 df <- read.csv("data/7201.T.csv", header = T)
-
 names(df) <- c("Date", "Open", "High", "Low", "Close", "Volume", "Adjusted")
+df$Date <- df$Date %>% as.Date()
 
-df <- df %>% filter(as.Date(df$Date) > as.Date('2010/01/01'))
-df.zoo <- zoo::zoo(df$Close, order.by = as.Date(df$Date, format = '%Y/%m/%d'))
-# to time-series
-close <- ts(df.zoo)
-
+df <- df %>% filter(Date > as.Date('2010/01/01'))
+df.zoo <- zoo::zoo(df$Close, order.by = df$Date)
+close <- ts(df.zoo) # to time-series
 close.diff <- diff(log(close))
 
 # ARMA
