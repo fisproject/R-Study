@@ -27,6 +27,16 @@ p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width,
 plot(p)
 ggsave("img/iris-smooth.png", plot = p)
 
+# Bar
+p <- iris %>%
+  group_by(Species) %>%
+  summarise(Sepal.Width = mean(Sepal.Width)) %>%
+  ggplot(aes(x = reorder(Species, -Sepal.Width), y = Sepal.Width)) +
+    geom_bar(stat = "identity") +
+    labs(title = "Iris", x = "Species", y = "Sepal.Width")
+plot(p)
+ggsave("img/iris-bar.png", plot = p)
+
 # Hist & density
 p <- ggplot(iris, aes(x = Sepal.Length, y = ..density..,
                       fill = Species, colour = Species)) +
