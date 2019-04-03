@@ -118,10 +118,18 @@ iris %>%
 # n max min     mean        sd
 # 1 150 7.9 4.3 5.843333 0.8280661
 
+# Summarize with conditions
+iris %>%
+  summarise(n_setosa = length(Species[Petal.Length > 1.5 & Species == "setosa"]),
+            n_versicolor = length(Species[Petal.Length > 3.0 & Species == "versicolor"]),
+            n_virginica = length(Species[Petal.Length > 4.5 & Species == "virginica"]))
+#   n_setosa n_versicolor n_virginica
+# 1       13           49          49
+
 # SQL: GROUP BY
 iris %>%
   group_by(Species) %>%
-  summarise_each(funs(mean))
+  summarise_all(funs(mean))
 # Source: local data frame [3 x 6]
 #
 #      Species Sepal.Length Sepal.Width Petal.Length Petal.Width
